@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f43eb301-840c-4d2b-8b99-4b40d6fc0bc8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HumanResourceManagement_SamSungSDS_Class2_Team5.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/base/MySQLConnection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/Department.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/Employee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/enumCommon/Gender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/login/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/program/Program.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/DepartmentService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/service/EmployeeService.java" afterDir="false" />
-    </list>
+    <list default="true" id="f43eb301-840c-4d2b-8b99-4b40d6fc0bc8" name="Changes" comment="CRUD" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,7 +72,30 @@
       <option name="presentableId" value="Default" />
       <updated>1678980727563</updated>
     </task>
+    <task id="LOCAL-00001" summary="CRUD">
+      <created>1679134765299</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679134765299</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="CRUD" />
+    <option name="LAST_COMMIT_MESSAGE" value="CRUD" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

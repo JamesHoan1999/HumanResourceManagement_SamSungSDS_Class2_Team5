@@ -21,12 +21,14 @@ public class Employee {
     private String address;
     private Date dateOfBirth;
     private int gender;
+    private String genderName;
     private String identityNumber;
     private String telephoneNumber;
     private String email;
     private String bankAccountNumber;
     private String bankName;
     private Integer isManage;
+    private String isManagerTxt;
     private double salary;
     private double tax;
 
@@ -168,7 +170,46 @@ public class Employee {
         this.tax = tax;
     }
 
-    public Employee(String employeeID, String employeeCode, String employeeName, String departmentID, String departmentName, String positionName, String address, Date dateOfBirth, int gender, String identityNumber, String telephoneNumber, String email, String bankAccountNumber, String bankName, Integer isManage, double salary, double tax) {
+    public String getGenderName() {
+        return genderName;
+    }
+
+    public void setGenderName(String genderName) {
+        this.genderName = genderName;
+    }
+
+    public String getIsManagerTxt() {
+        return isManagerTxt;
+    }
+
+    public void setIsManagerTxt(String isManagerTxt) {
+        this.isManagerTxt = isManagerTxt;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeID='" + employeeID + '\'' +
+                ", employeeCode='" + employeeCode + '\'' +
+                ", employeeName='" + employeeName + '\'' +
+                ", departmentID='" + departmentID + '\'' +
+                ", departmentName='" + departmentName + '\'' +
+                ", positionName='" + positionName + '\'' +
+                ", address='" + address + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", gender=" + gender +
+                ", identityNumber='" + identityNumber + '\'' +
+                ", telephoneNumber='" + telephoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", bankAccountNumber='" + bankAccountNumber + '\'' +
+                ", bankName='" + bankName + '\'' +
+                ", isManage=" + isManage +
+                ", salary=" + salary +
+                ", tax=" + tax +
+                '}';
+    }
+
+    public Employee(String employeeID, String employeeCode, String employeeName, String departmentID, String departmentName, String positionName, String address, Date dateOfBirth, int gender, String identityNumber, String telephoneNumber, String email, String bankAccountNumber, String bankName, Integer isManage, String isManagerTxt, double salary, double tax) {
         this.employeeID = employeeID;
         this.employeeCode = employeeCode;
         this.employeeName = employeeName;
@@ -178,12 +219,14 @@ public class Employee {
         this.address = address;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
+
         this.identityNumber = identityNumber;
         this.telephoneNumber = telephoneNumber;
         this.email = email;
         this.bankAccountNumber = bankAccountNumber;
         this.bankName = bankName;
         this.isManage = isManage;
+
         this.salary = salary;
         this.tax = tax;
     }
@@ -240,8 +283,10 @@ public class Employee {
 
             Connection connection = MySQLConnection.getConnection();
             Statement statement = connection.createStatement();
-           String sql = "INSERT INTO employee(EmployeeID,EmployeeCode,EmployeeName,DepartmentID,PositionName,Address,DateOfBirth,IdentityNumber,TelephoneNumber,Email,BankAccountNumber,BankName,IsManage,Salary,Tax) " +
-                   " Values ('"+employeeID+"','"+employeeCode+"','"+employeeName+"','"+departmentID+"','"+positionName+"','"+address+"','"+dateOfBirth+"','"+identityNumber+"','"+telephoneNumber+"','"+email+"','"+bankAccountNumber+"','"+bankName+"','"+isManage+"','"+salary+"','"+tax+"')";
+
+            java.sql.Date date = new java.sql.Date(dateOfBirth.getTime());
+           String sql = "INSERT INTO employee(EmployeeID,EmployeeCode,EmployeeName,DepartmentID,PositionName,Address,Gender,DateOfBirth,IdentityNumber,TelephoneNumber,Email,BankAccountNumber,BankName,IsManage,Salary,Tax) " +
+                   " Values ('"+employeeID+"','"+employeeCode+"','"+employeeName+"','"+departmentID+"','"+positionName+"','"+address+"',"+gender+",'"+date+"','"+identityNumber+"','"+telephoneNumber+"','"+email+"','"+bankAccountNumber+"','"+bankName+"',"+isManage+",'"+salary+"','"+tax+"')";
             int number = statement.executeUpdate(sql);
             if (number > 0){
                 return true;
@@ -260,7 +305,9 @@ public class Employee {
 
             Connection connection = MySQLConnection.getConnection();
             Statement statement = connection.createStatement();
-           String sql = "UPDATE employee SET EmployeeCode='"+employeeCode+"',EmployeeName='"+employeeName+"',DepartmentID='"+departmentID+"',PositionName='"+positionName+"',Address='"+address+"',DateOfBirth='"+dateOfBirth+"',IdentityNumber='"+identityNumber+"',TelephoneNumber='"+telephoneNumber+"',Email='"+email+"',BankAccountNumber='"+bankAccountNumber+"',BankName='"+bankName+"',IsManage='"+isManage+"',Salary='"+salary+"',Tax='"+tax+"' WHERE EmployeeID='"+employeeID+"'";
+
+            java.sql.Date date = new java.sql.Date(dateOfBirth.getTime());
+           String sql = "UPDATE employee SET EmployeeCode='"+employeeCode+"',EmployeeName='"+employeeName+"',DepartmentID='"+departmentID+"',PositionName='"+positionName+"',Address='"+address+"',DateOfBirth='"+date+"',IdentityNumber='"+identityNumber+"',TelephoneNumber='"+telephoneNumber+"',Email='"+email+"',BankAccountNumber='"+bankAccountNumber+"',BankName='"+bankName+"',IsManage='"+isManage+"',Salary='"+salary+"',Tax='"+tax+"' WHERE EmployeeID='"+employeeID+"'";
             int number = statement.executeUpdate(sql);
             if (number > 0){
                 return true;

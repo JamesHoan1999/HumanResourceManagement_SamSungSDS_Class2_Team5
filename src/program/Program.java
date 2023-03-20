@@ -93,9 +93,14 @@ public class Program {
         }
         else if (fea==3) {
             System.out.println("Cập nhật nhân viên");
+            EmployeeService.updateEmployee();
+            feature(1);
+
         }
         else if (fea==4) {
             System.out.println("Xóa  nhân viên");
+            EmployeeService.deleteEmployee();
+            feature(1);
         }
         else if (fea==5) {
             System.out.println("Tìm kiếm nhân viên theo mã,tên,sdt hoặc email");

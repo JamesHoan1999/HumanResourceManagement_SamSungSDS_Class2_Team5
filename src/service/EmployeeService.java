@@ -1,5 +1,6 @@
 package service;
 
+import base.MethodBase;
 import entity.Department;
 import entity.Employee;
 
@@ -18,18 +19,20 @@ public class EmployeeService {
        List<Employee> employeeList = Employee.getAllEmployees();
 
         System.out.println("Danh sách nhân viên");
-        System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s","Mã nhân viên",
+        System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s","STT","Mã nhân viên",
                 "Tên nhân viên","Tên phòng ban","Vị trí","Địa chỉ","Ngày sinh","Giới tính","SĐT","Email","Số tk","Tên Ngân hàng",
                 "Tiền lương","Thuế","Là trưởng phòng");
         System.out.println();
+        int count=1;
        for(Employee employee : employeeList){
 
-           System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s",employee.getEmployeeCode(),
+           System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s",count,employee.getEmployeeCode(),
                    employee.getEmployeeName(),employee.getDepartmentName(),employee.getPositionName(),employee.getAddress(),
-                   employee.getDateOfBirth(),employee.getGender(),employee.getTelephoneNumber(),employee.getEmail(),
+                   employee.getDateOfBirth(), MethodBase.convertGender(employee.getGender()),employee.getTelephoneNumber(),employee.getEmail(),
                    employee.getBankAccountNumber(),employee.getBankName(),
-                   employee.getSalary(),employee.getTax(),employee.getIsManage());
+                   employee.getSalary(),employee.getTax(),MethodBase.stringIsManage(employee.getIsManage()));
            System.out.println();
+           count++;
        }
     }
 
@@ -47,6 +50,8 @@ public class EmployeeService {
         System.out.println("Nhập stt phòng ban ");
         int stt=  scanner.nextInt();
         String departmentID=departments.get(stt-1).getDepartmentID();
+
+        scanner= new Scanner(System.in);
         System.out.println("Nhập vị trí");
         String positionName = scanner.nextLine();
         System.out.println("Nhập địa chỉ");
@@ -70,8 +75,8 @@ public class EmployeeService {
         Integer isManage = scanner.nextInt();
         System.out.println("Nhập tiền lương");
         double salary = scanner.nextDouble();
-        System.out.println("Nhập thuế");
-        double tax = scanner.nextDouble();
+
+        double tax = MethodBase.getTax(salary);
 
         String employeeId = UUID.randomUUID().toString();
 
@@ -85,8 +90,16 @@ public class EmployeeService {
         employee.setIdentityNumber(identityNumber);
 
         //Format date
-        DateFormat dob= new SimpleDateFormat("yyyy-MM-dd ");
-        Date date = dob.parse(dateOfBirth);
+        Date date = null;
+
+        try {
+             date = new SimpleDateFormat("yyyy-MM-dd" ).parse(dateOfBirth);
+        }
+        catch (ParseException e){
+            e.printStackTrace();
+        }
+
+
        employee.setDateOfBirth(date);
         employee.setGender(gender);
         employee.setTelephoneNumber(telephoneNumber);
@@ -95,12 +108,17 @@ public class EmployeeService {
         employee.setBankName(bankName);
         employee.setSalary(salary);
         employee.setTax(tax);
+
+
+        System.out.println(email);
         if(isManage==1){
             employee.setIsManage(isManage);
         }
         else {
             employee.setIsManage(null);
         }
+
+
 
 
 
@@ -111,6 +129,153 @@ public class EmployeeService {
             System.out.println("Thêm mới nhân viên thất bại");
         }
 
+
+    }
+
+    public static void updateEmployee() throws ParseException {
+
+        getAllEmployee();
+        List<Employee> employeeList = Employee.getAllEmployees();
+
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập stt nhân viên muốn sửa");
+        int stt=  scanner.nextInt();
+        Employee employee=employeeList.get(stt-1);
+        scanner = new Scanner(System.in);
+        System.out.println("Nhập mã nhân viên :");
+        String employeeCode = scanner.nextLine();
+        System.out.println("Nhập tên nhân viên");
+        String employeeName = scanner.nextLine();
+
+
+
+        System.out.println("Nhập vị trí");
+        String positionName = scanner.nextLine();
+        System.out.println("Nhập địa chỉ");
+        String address = scanner.nextLine();
+        System.out.println("Nhập ngày sinh theo định dạng yyyy-MM-dd");
+        String dateOfBirth = scanner.nextLine();
+        System.out.println("Nhập Giới tính");
+        int gender = scanner.nextInt();
+        scanner = new Scanner(System.in);
+        System.out.println("Nhập số cmnd ");
+        String identityNumber = scanner.nextLine();
+        System.out.println("Nhập số điện thoại");
+        String telephoneNumber = scanner.nextLine();
+        System.out.println("Nhập email");
+        String email = scanner.nextLine();
+        System.out.println("Nhập số tk");
+        String bankAccountNumber = scanner.nextLine();
+        System.out.println("Nhập tên ngân hàng");
+        String bankName = scanner.nextLine();
+
+        System.out.println("Nhập tiền lương");
+        double salary = scanner.nextDouble();
+
+        double tax = MethodBase.getTax(salary);
+
+
+
+
+        if(!employeeCode.trim().equals("")){
+            employee.setEmployeeCode(employeeCode);
+        }
+        if(!employeeName.trim().equals("")){
+            employee.setEmployeeName(employeeName);
+        }
+
+
+
+       if(!positionName.trim().equals("")){
+
+           employee.setPositionName(positionName);
+       }
+
+       if(!address.trim().equals("")){
+            employee.setAddress(address);
+        }
+
+       if(!dateOfBirth.trim().equals("")){
+            employee.setDateOfBirth(new SimpleDateFormat("yyyy-MM-dd" ).parse(dateOfBirth));
+        }
+       if(!identityNumber.trim().equals("")){
+
+           employee.setIdentityNumber(identityNumber);
+       }
+
+       if(!telephoneNumber.trim().equals("")){
+
+           employee.setTelephoneNumber(telephoneNumber);
+       }
+
+       if(!email.trim().equals("")){
+
+           employee.setEmail(email);
+       }
+
+       if(!bankAccountNumber.trim().equals("")){
+
+           employee.setBankAccountNumber(bankAccountNumber);
+       }
+
+       if(!bankName.trim().equals("")){
+
+           employee.setBankName(bankName);
+       }
+
+       if(salary > 0){
+
+           employee.setSalary(salary);
+           employee.setTax(tax);
+       }
+
+       if(!dateOfBirth.trim().equals("")){
+           Date date = null;
+
+           try {
+               date = new SimpleDateFormat("yyyy-MM-dd" ).parse(dateOfBirth);
+           }
+           catch (ParseException e){
+               e.printStackTrace();
+           }
+
+
+           employee.setDateOfBirth(date);
+       }
+
+        employee.setGender(gender);
+
+
+
+
+
+
+
+
+        if(employee.updateEmployee()){
+            System.out.println("Cập nhật nhân viên thành công");
+        }
+        else {
+            System.out.println("Cập nhật nhân viên thất bại");
+        }
+
+    }public static void deleteEmployee() throws ParseException {
+
+        getAllEmployee();
+        List<Employee> employeeList = Employee.getAllEmployees();
+
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Nhập stt nhân viên muốn xóa");
+        int stt=  scanner.nextInt();
+        Employee employee=employeeList.get(stt-1);
+        if(employee.deleteEmployee()){
+            System.out.println("Xóa nhân viên thành công");
+        }
+        else {
+            System.out.println("Xóa nhân viên thất bại");
+        }
 
     }
 }

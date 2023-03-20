@@ -4,13 +4,14 @@ import login.User;
 import service.DepartmentService;
 import service.EmployeeService;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Scanner;
 
 public class Program {
 
 
-    public static void homepage(){
+    public static void homepage() throws ParseException {
 
 
         System.out.println("Danh sách danh mục :");
@@ -30,7 +31,7 @@ public class Program {
 
     }
 
-    public static void  feature(int option){
+    public static void  feature(int option) throws ParseException {
         Scanner sc= new Scanner(System.in);
         switch (option){
             case 1:
@@ -77,7 +78,7 @@ public class Program {
 
     }
 
-    public static void featureEmployee(int fea){
+    public static void featureEmployee(int fea) throws ParseException {
         if (fea==1){
             System.out.println("Hiển thị danh sách nhân viên");
             EmployeeService.getAllEmployee();
@@ -105,7 +106,7 @@ public class Program {
         }
     }
 
-    public static void featureDepartment(int fea) {
+    public static void featureDepartment(int fea) throws ParseException {
         if (fea==1){
             System.out.println("Hiển thị danh sách phòng ban");
             DepartmentService.getAllDepartment();
@@ -136,7 +137,7 @@ public class Program {
         }
 
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
 
         System.out.println("Chào mừng bạn đến với hệ thống quản lý nhân sự .");

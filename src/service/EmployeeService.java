@@ -82,6 +82,7 @@ public class EmployeeService {
         employee.setDepartmentID(departmentID);
         employee.setPositionName(positionName);
         employee.setAddress(address);
+        employee.setIdentityNumber(identityNumber);
 
         //Format date
         DateFormat dob= new SimpleDateFormat("yyyy-MM-dd ");

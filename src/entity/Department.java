@@ -78,6 +78,7 @@ public class Department {
 
             List<Department> departmentList = new ArrayList<>();
             while (resultSet.next()){
+
            Department department = new Department();
            department.setDepartmentID(resultSet.getString("DepartmentID"));
            department.setDepartmentCode(resultSet.getString("DepartmentCode"));

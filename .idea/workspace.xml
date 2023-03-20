@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f43eb301-840c-4d2b-8b99-4b40d6fc0bc8" name="Changes" comment="CRUD">
+    <list default="true" id="f43eb301-840c-4d2b-8b99-4b40d6fc0bc8" name="Changes" comment="Employee">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Department.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/program/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/program/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/DepartmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/EmployeeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,13 +42,13 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/jar_files/mysql-connector-java-8.0.20.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="Program" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="program.Program" />
       <module name="HumanResourceManagement_SamSungSDS_Class2_Team5" />
@@ -63,8 +62,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <module name="HumanResourceManagement_SamSungSDS_Class2_Team5" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.Program" />
       </list>
     </recent_temporary>
@@ -92,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679134820533</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Employee">
+      <created>1679274970318</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679274970318</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -108,7 +122,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CRUD" />
-    <option name="LAST_COMMIT_MESSAGE" value="CRUD" />
+    <MESSAGE value="Employee" />
+    <option name="LAST_COMMIT_MESSAGE" value="Employee" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -121,11 +136,6 @@
           <properties class="java.sql.SQLIntegrityConstraintViolationException" package="java.sql" />
           <option name="timeStamp" value="2" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/entity/Department.java</url>
-          <line>142</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

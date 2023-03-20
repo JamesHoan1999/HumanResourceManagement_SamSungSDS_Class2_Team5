@@ -26,7 +26,7 @@ public class Employee {
     private String email;
     private String bankAccountNumber;
     private String bankName;
-    private String isManage;
+    private Integer isManage;
     private double salary;
     private double tax;
 
@@ -144,11 +144,11 @@ public class Employee {
         this.bankName = bankName;
     }
 
-    public String getIsManage() {
+    public Integer getIsManage() {
         return isManage;
     }
 
-    public void setIsManage(String isManage) {
+    public void setIsManage(Integer isManage) {
         this.isManage = isManage;
     }
 
@@ -168,7 +168,7 @@ public class Employee {
         this.tax = tax;
     }
 
-    public Employee(String employeeID, String employeeCode, String employeeName, String departmentID, String departmentName, String positionName, String address, Date dateOfBirth, int gender, String identityNumber, String telephoneNumber, String email, String bankAccountNumber, String bankName, String isManage, double salary, double tax) {
+    public Employee(String employeeID, String employeeCode, String employeeName, String departmentID, String departmentName, String positionName, String address, Date dateOfBirth, int gender, String identityNumber, String telephoneNumber, String email, String bankAccountNumber, String bankName, Integer isManage, double salary, double tax) {
         this.employeeID = employeeID;
         this.employeeCode = employeeCode;
         this.employeeName = employeeName;
@@ -217,7 +217,7 @@ public class Employee {
                employee.setEmail(resultSet.getString("email"));
                employee.setBankAccountNumber(resultSet.getString("bankAccountNumber"));
                employee.setBankName(resultSet.getString("bankName"));
-               employee.setIsManage(resultSet.getString("isManage"));
+               employee.setIsManage(resultSet.getInt("isManage"));
                employee.setSalary(resultSet.getDouble("salary"));
                employee.setTax(resultSet.getDouble("tax"));
                employee.setDepartmentName(resultSet.getString("departmentName"));

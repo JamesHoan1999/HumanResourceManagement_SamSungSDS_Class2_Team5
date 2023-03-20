@@ -85,7 +85,10 @@ public class Program {
 
         }
         else if (fea==2) {
+
             System.out.println("Thêm mới nhân viên");
+            EmployeeService.insertEmployee();
+            feature(1);
         }
         else if (fea==3) {
             System.out.println("Cập nhật nhân viên");

@@ -3,6 +3,9 @@ package service;
 import entity.Department;
 import entity.Employee;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -31,7 +34,7 @@ public class EmployeeService {
     }
 
 
-    public static void insertEmployee(){
+    public static void insertEmployee() throws ParseException {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập mã nhân viên :");
@@ -48,7 +51,7 @@ public class EmployeeService {
         String positionName = scanner.nextLine();
         System.out.println("Nhập địa chỉ");
         String address = scanner.nextLine();
-        System.out.println("Nhập ngày sinh");
+        System.out.println("Nhập ngày sinh theo định dạng yyyy-MM-dd");
         String dateOfBirth = scanner.nextLine();
         System.out.println("Nhập Giới tính");
         int gender = scanner.nextInt();
@@ -63,7 +66,7 @@ public class EmployeeService {
         String bankAccountNumber = scanner.nextLine();
         System.out.println("Nhập tên ngân hàng");
         String bankName = scanner.nextLine();
-        System.out.println("Là trưởng phòng hay không !Nếu có nhập 1 ");
+        System.out.println("Là trưởng phòng hay không !Nếu có nhập 1 Không thì nhập 0");
         Integer isManage = scanner.nextInt();
         System.out.println("Nhập tiền lương");
         double salary = scanner.nextDouble();
@@ -79,7 +82,11 @@ public class EmployeeService {
         employee.setDepartmentID(departmentID);
         employee.setPositionName(positionName);
         employee.setAddress(address);
-//        employee.setDateOfBirth(dateOfBirth);
+
+        //Format date
+        DateFormat dob= new SimpleDateFormat("yyyy-MM-dd ");
+        Date date = dob.parse(dateOfBirth);
+       employee.setDateOfBirth(date);
         employee.setGender(gender);
         employee.setTelephoneNumber(telephoneNumber);
         employee.setEmail(email);
@@ -87,7 +94,13 @@ public class EmployeeService {
         employee.setBankName(bankName);
         employee.setSalary(salary);
         employee.setTax(tax);
-        employee.setIsManage(isManage);
+        if(isManage==1){
+            employee.setIsManage(isManage);
+        }
+        else {
+            employee.setIsManage(null);
+        }
+
 
 
         if(employee.insertEmployee()){

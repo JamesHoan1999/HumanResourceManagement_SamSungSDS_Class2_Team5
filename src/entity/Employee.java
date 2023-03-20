@@ -234,4 +234,64 @@ public class Employee {
         return  new ArrayList<Employee>();
 
     }
+
+    public boolean insertEmployee(){
+        try {
+
+            Connection connection = MySQLConnection.getConnection();
+            Statement statement = connection.createStatement();
+           String sql = "INSERT INTO employee(EmployeeID,EmployeeCode,EmployeeName,DepartmentID,PositionName,Address,DateOfBirth,IdentityNumber,TelephoneNumber,Email,BankAccountNumber,BankName,IsManage,Salary,Tax) " +
+                   " Values ('"+employeeID+"','"+employeeCode+"','"+employeeName+"','"+departmentID+"','"+positionName+"','"+address+"','"+dateOfBirth+"','"+identityNumber+"','"+telephoneNumber+"','"+email+"','"+bankAccountNumber+"','"+bankName+"','"+isManage+"','"+salary+"','"+tax+"')";
+            int number = statement.executeUpdate(sql);
+            if (number > 0){
+                return true;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return  false;
+    }
+
+    public boolean updateEmployee(){
+        try {
+
+            Connection connection = MySQLConnection.getConnection();
+            Statement statement = connection.createStatement();
+           String sql = "UPDATE employee SET EmployeeCode='"+employeeCode+"',EmployeeName='"+employeeName+"',DepartmentID='"+departmentID+"',PositionName='"+positionName+"',Address='"+address+"',DateOfBirth='"+dateOfBirth+"',IdentityNumber='"+identityNumber+"',TelephoneNumber='"+telephoneNumber+"',Email='"+email+"',BankAccountNumber='"+bankAccountNumber+"',BankName='"+bankName+"',IsManage='"+isManage+"',Salary='"+salary+"',Tax='"+tax+"' WHERE EmployeeID='"+employeeID+"'";
+            int number = statement.executeUpdate(sql);
+            if (number > 0){
+                return true;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return  false;
+    }
+
+    public boolean deleteEmployee(){
+        try {
+
+            Connection connection = MySQLConnection.getConnection();
+            Statement statement = connection.createStatement();
+           String sql = "DELETE FROM employee WHERE EmployeeID='"+employeeID+"'";
+            int number = statement.executeUpdate(sql);
+            if (number > 0){
+                return true;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return  false;
+    }
+
+
 }

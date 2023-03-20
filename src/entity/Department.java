@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Department {
 
@@ -71,10 +72,8 @@ public class Department {
         try {
 
             Connection connection = MySQLConnection.getConnection();
-
-
             Statement statement = connection.createStatement();
-            String sql="SELECT d.*,e.EmployeeName AS ManageName FROM department d JOIN employee e ON  d.DepartmentID=e.DepartmentID WHERE e.IsManage=1;  ";
+            String sql="SELECT d.*,e.EmployeeName AS ManageName FROM department d Left JOIN employee e ON  d.DepartmentID=e.DepartmentID ";
             ResultSet resultSet = statement.executeQuery(sql);
 
             List<Department> departmentList = new ArrayList<>();
@@ -96,6 +95,64 @@ public class Department {
 
 
         return  new ArrayList<Department>();
+    }
+
+    public  boolean insertDepartment(){
+        try {
+
+            Connection connection = MySQLConnection.getConnection();
+            Statement statement = connection.createStatement();
+            String sql="INSERT INTO department (DepartmentID,DepartmentCode,DepartmentName,PhoneNumber)" +
+                    "Values ('"+departmentID+"','"+departmentCode+"','"+departmentName+"','"+phoneNumber+"')";
+            int number = statement.executeUpdate(sql);
+            if (number > 0){
+                return true;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return  false;
+    }
+    public boolean updateDepartment(){
+        try {
+
+            Connection connection = MySQLConnection.getConnection();
+            Statement statement = connection.createStatement();
+            String sql="UPDATE department SET DepartmentCode='"+departmentCode+"',DepartmentName='"+departmentName+"',PhoneNumber='"+phoneNumber+"' WHERE DepartmentID='"+departmentID+"'";
+            int number = statement.executeUpdate(sql);
+            if (number > 0){
+                return true;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return  false;
+    }
+
+    public boolean deleteDepartment(){
+        try {
+
+            Connection connection = MySQLConnection.getConnection();
+            Statement statement = connection.createStatement();
+            String sql="DELETE FROM department WHERE DepartmentID='"+departmentID+"'";
+            int number = statement.executeUpdate(sql);
+            if (number > 0){
+                return true;
+            }
+        } catch (Exception SQLIntegrityConstraintViolationException ) {
+
+            return  false;
+
+        }
+
+        return  false;
+
     }
 
 

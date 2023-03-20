@@ -111,12 +111,20 @@ public class Program {
         }
         else if (fea==2) {
             System.out.println("Thêm mới phòng ban");
+            DepartmentService.insertDepartment();
+            feature(2);
         }
         else if (fea==3) {
             System.out.println("Cập nhật phòng ban");
+
+            DepartmentService.updateDepartment();
+            feature(2);
         }
         else if (fea==4) {
             System.out.println("Xóa  phòng ban");
+
+            DepartmentService.deleteDepartment();
+            feature(2);
         }
 
         else if (fea==0) {

@@ -18,7 +18,10 @@ public class Department {
     private String phoneNumber;
 
 
-    public Department(){};
+    public Department() {
+    }
+
+    ;
 
     public Department(String departmentID, String departmentCode, String departmentName, String managerName, String phoneNumber) {
         this.departmentID = departmentID;
@@ -68,26 +71,36 @@ public class Department {
         this.managerName = managerName;
     }
 
-    public static List<Department> getAllDepartment(){
+    /**
+     *
+     * @return Danh sách phòng ban
+     */
+    public static List<Department> getAllDepartment() {
         try {
 
-            Connection connection = MySQLConnection.getConnection();
-            Statement statement = connection.createStatement();
-            String sql="SELECT d.*,e.EmployeeName AS ManageName FROM department d Left JOIN employee e ON  d.DepartmentID=e.DepartmentID ";
+            //Chuẩn bị câu lệnh truy vấn
+            String sql = "SELECT d.*,e.EmployeeName AS ManageName FROM department d  left JOIN employee e ON  d.DepartmentID=e.DepartmentID AND e.IsManage = 1";
+            //Khởi tạo kết nối
+            Statement statement = MySQLConnection.getStatement();
+
+            //Thực hiện truy vấn, lấy ra dữ liệu
             ResultSet resultSet = statement.executeQuery(sql);
 
+            //Khởi tạo list phòng ban
             List<Department> departmentList = new ArrayList<>();
-            while (resultSet.next()){
+            while (resultSet.next()) {
 
-           Department department = new Department();
-           department.setDepartmentID(resultSet.getString("DepartmentID"));
-           department.setDepartmentCode(resultSet.getString("DepartmentCode"));
-           department.setDepartmentName(resultSet.getString("DepartmentName"));
-           department.setPhoneNumber(resultSet.getString("PhoneNumber"));
-           department.setManagerName(resultSet.getString("ManageName"));
-           departmentList.add(department);
+                Department department = new Department();
+                department.setDepartmentID(resultSet.getString("DepartmentID"));
+                department.setDepartmentCode(resultSet.getString("DepartmentCode"));
+                department.setDepartmentName(resultSet.getString("DepartmentName"));
+                department.setPhoneNumber(resultSet.getString("PhoneNumber"));
+                department.setManagerName(resultSet.getString("ManageName"));
+                departmentList.add(department);
 
             }
+            //Thực hiện đóng kết nối
+            statement.close();
             return departmentList;
         } catch (Exception ex) {
             System.out.println("Error : fail");
@@ -95,18 +108,25 @@ public class Department {
         }
 
 
-        return  new ArrayList<Department>();
+        return new ArrayList<Department>();
     }
 
-    public  boolean insertDepartment(){
+    /**
+     * Thêm mới phòng ban
+     * @return trả về true nếu thêm thành công
+     */
+    public boolean insertDepartment() {
         try {
-
-            Connection connection = MySQLConnection.getConnection();
-            Statement statement = connection.createStatement();
-            String sql="INSERT INTO department (DepartmentID,DepartmentCode,DepartmentName,PhoneNumber)" +
-                    "Values ('"+departmentID+"','"+departmentCode+"','"+departmentName+"','"+phoneNumber+"')";
+            //Chuẩn bị câu lệnh truy vấn dữ liệu
+            String sql = "INSERT INTO department (DepartmentID,DepartmentCode,DepartmentName,PhoneNumber)" +
+                    "Values ('" + departmentID + "','" + departmentCode + "','" + departmentName + "','" + phoneNumber + "')";
+            //Khởi tạo kết nối đến database (Muộn nhất có thể
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn , lấy ra số bản ghi bị ảnh hưởng
             int number = statement.executeUpdate(sql);
-            if (number > 0){
+            //Thực hiện đóng kết nối
+            statement.close();
+            if (number > 0) {
                 return true;
             }
         } catch (Exception ex) {
@@ -115,16 +135,24 @@ public class Department {
         }
 
 
-        return  false;
+        return false;
     }
-    public boolean updateDepartment(){
-        try {
 
-            Connection connection = MySQLConnection.getConnection();
-            Statement statement = connection.createStatement();
-            String sql="UPDATE department SET DepartmentCode='"+departmentCode+"',DepartmentName='"+departmentName+"',PhoneNumber='"+phoneNumber+"' WHERE DepartmentID='"+departmentID+"'";
+    /**
+     * Sửa phòng ban
+     * @return trả về true nếu sửa thành công
+     */
+    public boolean updateDepartment() {
+        try {
+            //Chuẩn bị câu lệnh sql
+            String sql = "UPDATE department SET DepartmentCode='" + departmentCode + "',DepartmentName='" + departmentName + "',PhoneNumber='" + phoneNumber + "' WHERE DepartmentID='" + departmentID + "'";
+            //Khởi tạo kết nối
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào database
             int number = statement.executeUpdate(sql);
-            if (number > 0){
+            //Thực hiện đóng kết nố
+            statement.close();
+            if (number > 0) {
                 return true;
             }
         } catch (Exception ex) {
@@ -133,26 +161,34 @@ public class Department {
         }
 
 
-        return  false;
+        return false;
     }
 
-    public boolean deleteDepartment(){
+    /**
+     * Xóa phòng ban
+     * @return true nếu xóa thành công
+     */
+    public boolean deleteDepartment() {
         try {
 
-            Connection connection = MySQLConnection.getConnection();
-            Statement statement = connection.createStatement();
-            String sql="DELETE FROM department WHERE DepartmentID='"+departmentID+"'";
+            //Chuẩn bị câu lệnh
+            String sql = "DELETE FROM department WHERE DepartmentID='" + departmentID + "'";
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào database
             int number = statement.executeUpdate(sql);
-            if (number > 0){
+            //Thực hiện đóng kết nối
+            statement.close();
+            if (number > 0) {
                 return true;
             }
-        } catch (Exception SQLIntegrityConstraintViolationException ) {
+        } catch (Exception SQLIntegrityConstraintViolationException) {
 
-            return  false;
+            return false;
 
         }
 
-        return  false;
+        return false;
 
     }
 

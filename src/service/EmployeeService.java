@@ -15,8 +15,56 @@ import java.util.UUID;
 public class EmployeeService {
 
 
+
+
+    public static void  showListEmployee(List<Employee> employeeList){
+        System.out.println("Danh sách nhân viên");
+        System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s","STT","Mã nhân viên",
+                "Tên nhân viên","Tên phòng ban","Vị trí","Địa chỉ","Ngày sinh","Giới tính","SĐT","Email","Số tk","Tên Ngân hàng",
+                "Tiền lương","Thuế","Là trưởng phòng");
+        System.out.println();
+        int count=1;
+        for(Employee employee : employeeList){
+
+            System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s",count,employee.getEmployeeCode(),
+                    employee.getEmployeeName(),employee.getDepartmentName(),employee.getPositionName(),employee.getAddress(),
+                    employee.getDateOfBirth(), MethodBase.convertGender(employee.getGender()),employee.getTelephoneNumber(),employee.getEmail(),
+                    employee.getBankAccountNumber(),employee.getBankName(),
+                    employee.getSalary(),employee.getTax(),MethodBase.stringIsManage(employee.getIsManage()));
+            System.out.println();
+            count++;
+        }
+
+    }
+
+
     public static void getAllEmployee(){
        List<Employee> employeeList = Employee.getAllEmployees();
+
+        System.out.println("Danh sách nhân viên");
+        System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s","STT","Mã nhân viên",
+                "Tên nhân viên","Tên phòng ban","Vị trí","Địa chỉ","Ngày sinh","Giới tính","SĐT","Email","Số tk","Tên Ngân hàng",
+                "Tiền lương","Thuế","Là trưởng phòng");
+        System.out.println();
+        int count=1;
+       for(Employee employee : employeeList){
+
+           System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s",count,employee.getEmployeeCode(),
+                   employee.getEmployeeName(),employee.getDepartmentName(),employee.getPositionName(),employee.getAddress(),
+                   employee.getDateOfBirth(), MethodBase.convertGender(employee.getGender()),employee.getTelephoneNumber(),employee.getEmail(),
+                   employee.getBankAccountNumber(),employee.getBankName(),
+                   employee.getSalary(),employee.getTax(),MethodBase.stringIsManage(employee.getIsManage()));
+           System.out.println();
+           count++;
+       }
+    }
+
+
+    public static void searchEmployee(){
+        System.out.println("Nhập thông tin tìm kiếm theo tên ,sdt,email,mã nv");
+        Scanner scanner = new Scanner(System.in);
+        String key = scanner.nextLine();
+       List<Employee> employeeList = Employee.searchEmployees(key);
 
         System.out.println("Danh sách nhân viên");
         System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s","STT","Mã nhân viên",
@@ -90,14 +138,8 @@ public class EmployeeService {
         employee.setIdentityNumber(identityNumber);
 
         //Format date
-        Date date = null;
+        Date date = MethodBase.convertDate(dateOfBirth);
 
-        try {
-             date = new SimpleDateFormat("yyyy-MM-dd" ).parse(dateOfBirth);
-        }
-        catch (ParseException e){
-            e.printStackTrace();
-        }
 
 
        employee.setDateOfBirth(date);
@@ -110,7 +152,7 @@ public class EmployeeService {
         employee.setTax(tax);
 
 
-        System.out.println(email);
+
         if(isManage==1){
             employee.setIsManage(isManage);
         }
@@ -156,8 +198,15 @@ public class EmployeeService {
         String address = scanner.nextLine();
         System.out.println("Nhập ngày sinh theo định dạng yyyy-MM-dd");
         String dateOfBirth = scanner.nextLine();
-        System.out.println("Nhập Giới tính");
-        int gender = scanner.nextInt();
+        System.out.println("Nhập Giới tính .Nhập 0(Nam),1(Nữ),2(Khác)");
+
+
+        int gender =MethodBase.getNumberScanner();
+
+        while ( gender > 2 || gender<0){
+            System.out.println("Bạn nhập không hợp lệ .Vui lòng nhập lại số từ 0 đến 2");
+            gender=MethodBase.getNumberScanner();
+        }
         scanner = new Scanner(System.in);
         System.out.println("Nhập số cmnd ");
         String identityNumber = scanner.nextLine();
@@ -197,7 +246,8 @@ public class EmployeeService {
         }
 
        if(!dateOfBirth.trim().equals("")){
-            employee.setDateOfBirth(new SimpleDateFormat("yyyy-MM-dd" ).parse(dateOfBirth));
+           Date date = MethodBase.convertDate(dateOfBirth);
+            employee.setDateOfBirth(date);
         }
        if(!identityNumber.trim().equals("")){
 
@@ -230,28 +280,9 @@ public class EmployeeService {
            employee.setTax(tax);
        }
 
-       if(!dateOfBirth.trim().equals("")){
-           Date date = null;
 
-           try {
-               date = new SimpleDateFormat("yyyy-MM-dd" ).parse(dateOfBirth);
-           }
-           catch (ParseException e){
-               e.printStackTrace();
-           }
-
-
-           employee.setDateOfBirth(date);
-       }
 
         employee.setGender(gender);
-
-
-
-
-
-
-
 
         if(employee.updateEmployee()){
             System.out.println("Cập nhật nhân viên thành công");
@@ -260,7 +291,9 @@ public class EmployeeService {
             System.out.println("Cập nhật nhân viên thất bại");
         }
 
-    }public static void deleteEmployee() throws ParseException {
+    }
+
+    public static void deleteEmployee() throws ParseException {
 
         getAllEmployee();
         List<Employee> employeeList = Employee.getAllEmployees();

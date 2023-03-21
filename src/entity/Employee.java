@@ -2,6 +2,7 @@ package entity;
 
 
 import base.MySQLConnection;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -186,28 +187,6 @@ public class Employee {
         this.isManagerTxt = isManagerTxt;
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "employeeID='" + employeeID + '\'' +
-                ", employeeCode='" + employeeCode + '\'' +
-                ", employeeName='" + employeeName + '\'' +
-                ", departmentID='" + departmentID + '\'' +
-                ", departmentName='" + departmentName + '\'' +
-                ", positionName='" + positionName + '\'' +
-                ", address='" + address + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", gender=" + gender +
-                ", identityNumber='" + identityNumber + '\'' +
-                ", telephoneNumber='" + telephoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", bankAccountNumber='" + bankAccountNumber + '\'' +
-                ", bankName='" + bankName + '\'' +
-                ", isManage=" + isManage +
-                ", salary=" + salary +
-                ", tax=" + tax +
-                '}';
-    }
 
     public Employee(String employeeID, String employeeCode, String employeeName, String departmentID, String departmentName, String positionName, String address, Date dateOfBirth, int gender, String identityNumber, String telephoneNumber, String email, String bankAccountNumber, String bankName, Integer isManage, String isManagerTxt, double salary, double tax) {
         this.employeeID = employeeID;
@@ -231,64 +210,248 @@ public class Employee {
         this.tax = tax;
     }
 
-    public  Employee() {}
+    public Employee() {
+    }
 
-
+    /**
+     * Lấy tất cả danh sách nhân viên
+     * @return danh sách nhân viên
+     */
     public static List<Employee> getAllEmployees() {
         try {
 
-            Connection connection = MySQLConnection.getConnection();
 
-
-            Statement statement = connection.createStatement();
-            String sql="SELECT e.*,d.DepartmentName from employee e JOIN department d ON  e.DepartmentID=d.DepartmentID  ";
+            //Chuẩn bị câu lệnh truy vấn
+            String sql = "SELECT e.*,d.DepartmentName from employee e left JOIN department d ON  e.DepartmentID=d.DepartmentID  ";
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào database
             ResultSet resultSet = statement.executeQuery(sql);
 
+            //Khởi tại list nhân viên
             List<Employee> employeeList = new ArrayList<>();
-           while (resultSet.next()){
-               Employee employee = new Employee();
-               employee.setEmployeeID(resultSet.getString("employeeID"));
-               employee.setEmployeeCode(resultSet.getString("employeeCode"));
-               employee.setEmployeeName(resultSet.getString("employeeName"));
-               employee.setDepartmentID(resultSet.getString("departmentID"));
-               employee.setPositionName(resultSet.getString("positionName"));
-               employee.setAddress(resultSet.getString("address"));
-               employee.setDateOfBirth(resultSet.getDate("dateOfBirth"));
-               employee.setGender(resultSet.getInt("gender"));
-               employee.setIdentityNumber(resultSet.getString("identityNumber"));
-               employee.setTelephoneNumber(resultSet.getString("telephoneNumber"));
-               employee.setEmail(resultSet.getString("email"));
-               employee.setBankAccountNumber(resultSet.getString("bankAccountNumber"));
-               employee.setBankName(resultSet.getString("bankName"));
-               employee.setIsManage(resultSet.getInt("isManage"));
-               employee.setSalary(resultSet.getDouble("salary"));
-               employee.setTax(resultSet.getDouble("tax"));
-               employee.setDepartmentName(resultSet.getString("departmentName"));
+            //lấy dữ liệu từ database rồi add vào employeeList
+            while (resultSet.next()) {
+                Employee employee = new Employee();
+                employee.setEmployeeID(resultSet.getString("employeeID"));
+                employee.setEmployeeCode(resultSet.getString("employeeCode"));
+                employee.setEmployeeName(resultSet.getString("employeeName"));
+                employee.setDepartmentID(resultSet.getString("departmentID"));
+                employee.setPositionName(resultSet.getString("positionName"));
+                employee.setAddress(resultSet.getString("address"));
+                employee.setDateOfBirth(resultSet.getDate("dateOfBirth"));
+                employee.setGender(resultSet.getInt("gender"));
+                employee.setIdentityNumber(resultSet.getString("identityNumber"));
+                employee.setTelephoneNumber(resultSet.getString("telephoneNumber"));
+                employee.setEmail(resultSet.getString("email"));
+                employee.setBankAccountNumber(resultSet.getString("bankAccountNumber"));
+                employee.setBankName(resultSet.getString("bankName"));
+                employee.setIsManage(resultSet.getInt("isManage"));
+                employee.setSalary(resultSet.getDouble("salary"));
+                employee.setTax(resultSet.getDouble("tax"));
+                employee.setDepartmentName(resultSet.getString("departmentName"));
 
-               employeeList.add(employee);
-           }
-           return employeeList;
+                employeeList.add(employee);
+            }
+            //Thực hiện đóng kết nối
+            statement.close();
+            return employeeList;
         } catch (Exception ex) {
             System.out.println("Error : fail");
             ex.printStackTrace();
         }
 
 
-        return  new ArrayList<Employee>();
+        return new ArrayList<Employee>();
 
     }
 
-    public boolean insertEmployee(){
+    /**
+     * Lấy danh sách nhân viên thuộc phòng ban
+     * @param departmentID id phòng ban muốn lấy danh sách nhân viên
+     * @return danh sách nhân viên của phòng ban đó
+     */
+    public static List<Employee> getEmployeesByDepartmentID(String departmentID) {
         try {
 
-            Connection connection = MySQLConnection.getConnection();
-            Statement statement = connection.createStatement();
+            //Chuẩn bị câu lệnh sql
+            String sql = "SELECT e.*,d.DepartmentName from employee e left JOIN department d ON  e.DepartmentID=d.DepartmentID where e.DepartmentID='" + departmentID + "' ";
+            //Khởi tạo kết nối đến databsae
+            Statement statement = MySQLConnection.getStatement();
 
+            //Thực hiện truy vấn vào database
+            ResultSet resultSet = statement.executeQuery(sql);
+
+
+            //Khởi tại list nhân viên
+            List<Employee> employeeList = new ArrayList<>();
+            //lấy dữ liệu từ database rồi add vào employeeList
+            while (resultSet.next()) {
+                Employee employee = new Employee();
+                employee.setEmployeeID(resultSet.getString("employeeID"));
+                employee.setEmployeeCode(resultSet.getString("employeeCode"));
+                employee.setEmployeeName(resultSet.getString("employeeName"));
+                employee.setDepartmentID(resultSet.getString("departmentID"));
+                employee.setPositionName(resultSet.getString("positionName"));
+                employee.setAddress(resultSet.getString("address"));
+                employee.setDateOfBirth(resultSet.getDate("dateOfBirth"));
+                employee.setGender(resultSet.getInt("gender"));
+                employee.setIdentityNumber(resultSet.getString("identityNumber"));
+                employee.setTelephoneNumber(resultSet.getString("telephoneNumber"));
+                employee.setEmail(resultSet.getString("email"));
+                employee.setBankAccountNumber(resultSet.getString("bankAccountNumber"));
+                employee.setBankName(resultSet.getString("bankName"));
+                employee.setIsManage(resultSet.getInt("isManage"));
+                employee.setSalary(resultSet.getDouble("salary"));
+                employee.setTax(resultSet.getDouble("tax"));
+                employee.setDepartmentName(resultSet.getString("departmentName"));
+                employeeList.add(employee);
+            }
+            //Thực hiện đóng kết nối
+            statement.close();
+            return employeeList;
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return new ArrayList<Employee>();
+
+    }
+
+    /**
+     * Lấy danh sách nhân viên chưa có phòng ban
+     * @return danh sách nhân viên chưa thuộc phòng ban nào
+     */
+    public static List<Employee> getEmployeesHasNotDepartmentID() {
+        try {
+
+            //Chuẩn bị câu lệnh sql
+            String sql = "SELECT * from employee e where e.DepartmentID is null";
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào database
+            ResultSet resultSet = statement.executeQuery(sql);
+
+
+            //Khởi tạo list nhân viên
+            List<Employee> employeeList = new ArrayList<>();
+            //lấy dữ liệu từ database rồi add vào employeeList
+            while (resultSet.next()) {
+                Employee employee = new Employee();
+                employee.setEmployeeID(resultSet.getString("employeeID"));
+                employee.setEmployeeCode(resultSet.getString("employeeCode"));
+                employee.setEmployeeName(resultSet.getString("employeeName"));
+                employee.setDepartmentID(resultSet.getString("departmentID"));
+                employee.setPositionName(resultSet.getString("positionName"));
+                employee.setAddress(resultSet.getString("address"));
+                employee.setDateOfBirth(resultSet.getDate("dateOfBirth"));
+                employee.setGender(resultSet.getInt("gender"));
+                employee.setIdentityNumber(resultSet.getString("identityNumber"));
+                employee.setTelephoneNumber(resultSet.getString("telephoneNumber"));
+                employee.setEmail(resultSet.getString("email"));
+                employee.setBankAccountNumber(resultSet.getString("bankAccountNumber"));
+                employee.setBankName(resultSet.getString("bankName"));
+                employee.setIsManage(resultSet.getInt("isManage"));
+                employee.setSalary(resultSet.getDouble("salary"));
+                employee.setTax(resultSet.getDouble("tax"));
+
+
+                employeeList.add(employee);
+            }
+
+            //Thực hiện đóng kết nối
+            statement.close();
+            return employeeList;
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return new ArrayList<Employee>();
+
+    }
+
+
+    /**
+     * Tìm kiếm nhân viên theo mã ,tên,sdt hoặc email
+     * @param keySearch từ khóa tìm kiếm nhân viên
+     * @return danh sách nhân viên
+     */
+    public static List<Employee> searchEmployees(String keySearch) {
+        try {
+
+            //Chuẩn bị câu lệnh truy vấn
+            String sql = "SELECT e.*,d.DepartmentName from employee e left JOIN department d ON  e.DepartmentID=d.DepartmentID  where  e.EmployeeCode LIKE '%" + keySearch + "%' OR e.EmployeeName like '%" + keySearch + "%' OR e.TelephoneNumber LIKE '%" + keySearch + "%' OR e.Email LIKE '%" + keySearch + "%' ;";
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào database
+            ResultSet resultSet = statement.executeQuery(sql);
+
+
+            //Khởi tại list nhân viên
+            List<Employee> employeeList = new ArrayList<>();
+            //lấy dữ liệu từ database rồi add vào employeeList
+            while (resultSet.next()) {
+                Employee employee = new Employee();
+                employee.setEmployeeID(resultSet.getString("employeeID"));
+                employee.setEmployeeCode(resultSet.getString("employeeCode"));
+                employee.setEmployeeName(resultSet.getString("employeeName"));
+                employee.setDepartmentID(resultSet.getString("departmentID"));
+                employee.setPositionName(resultSet.getString("positionName"));
+                employee.setAddress(resultSet.getString("address"));
+                employee.setDateOfBirth(resultSet.getDate("dateOfBirth"));
+                employee.setGender(resultSet.getInt("gender"));
+                employee.setIdentityNumber(resultSet.getString("identityNumber"));
+                employee.setTelephoneNumber(resultSet.getString("telephoneNumber"));
+                employee.setEmail(resultSet.getString("email"));
+                employee.setBankAccountNumber(resultSet.getString("bankAccountNumber"));
+                employee.setBankName(resultSet.getString("bankName"));
+                employee.setIsManage(resultSet.getInt("isManage"));
+                employee.setSalary(resultSet.getDouble("salary"));
+                employee.setTax(resultSet.getDouble("tax"));
+                employee.setDepartmentName(resultSet.getString("departmentName"));
+
+                employeeList.add(employee);
+            }
+            //Thực hiện đóng kết nối
+            statement.close();
+            return employeeList;
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return new ArrayList<Employee>();
+
+    }
+
+
+    /**
+     *
+     * @return true nếu thêm thành công nhân  viên
+     */
+    public boolean insertEmployee() {
+        try {
+
+
+            //Chuyển kiểu date java về date sql
             java.sql.Date date = new java.sql.Date(dateOfBirth.getTime());
-           String sql = "INSERT INTO employee(EmployeeID,EmployeeCode,EmployeeName,DepartmentID,PositionName,Address,Gender,DateOfBirth,IdentityNumber,TelephoneNumber,Email,BankAccountNumber,BankName,IsManage,Salary,Tax) " +
-                   " Values ('"+employeeID+"','"+employeeCode+"','"+employeeName+"','"+departmentID+"','"+positionName+"','"+address+"',"+gender+",'"+date+"','"+identityNumber+"','"+telephoneNumber+"','"+email+"','"+bankAccountNumber+"','"+bankName+"',"+isManage+",'"+salary+"','"+tax+"')";
+            //Chuẩn bị câu lệnh truy vấn
+            String sql = "INSERT INTO employee(EmployeeID,EmployeeCode,EmployeeName,DepartmentID,PositionName,Address,Gender,DateOfBirth,IdentityNumber,TelephoneNumber,Email,BankAccountNumber,BankName,IsManage,Salary,Tax) " +
+                    " Values ('" + employeeID + "','" + employeeCode + "','" + employeeName + "','" + departmentID + "','" + positionName + "','" + address + "'," + gender + ",'" + date + "','" + identityNumber + "','" + telephoneNumber + "','" + email + "','" + bankAccountNumber + "','" + bankName + "'," + isManage + ",'" + salary + "','" + tax + "')";
+            //Khởi tạo kết nối đến Database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh hưởng
             int number = statement.executeUpdate(sql);
-            if (number > 0){
+
+            //Thực hiện đóng kết nối
+            statement.close();
+
+            if (number > 0) {
                 return true;
             }
         } catch (Exception ex) {
@@ -297,19 +460,28 @@ public class Employee {
         }
 
 
-        return  false;
+        return false;
     }
 
-    public boolean updateEmployee(){
+    /**
+     * Cập nhật thông tin nhân viên
+     * @return true nếu cập nhật thành công
+     */
+    public boolean updateEmployee() {
         try {
 
-            Connection connection = MySQLConnection.getConnection();
-            Statement statement = connection.createStatement();
 
+            //Chuyển kiểu date java về date sql
             java.sql.Date date = new java.sql.Date(dateOfBirth.getTime());
-           String sql = "UPDATE employee SET EmployeeCode='"+employeeCode+"',EmployeeName='"+employeeName+"',DepartmentID='"+departmentID+"',PositionName='"+positionName+"',Address='"+address+"',DateOfBirth='"+date+"',IdentityNumber='"+identityNumber+"',TelephoneNumber='"+telephoneNumber+"',Email='"+email+"',BankAccountNumber='"+bankAccountNumber+"',BankName='"+bankName+"',IsManage='"+isManage+"',Salary='"+salary+"',Tax='"+tax+"' WHERE EmployeeID='"+employeeID+"'";
+            //Chuẩn bị câu lệnh truy vấn
+            String sql = "UPDATE employee SET EmployeeCode='" + employeeCode + "',EmployeeName='" + employeeName + "',DepartmentID='" + departmentID + "',PositionName='" + positionName + "',Address='" + address + "',DateOfBirth='" + date + "',IdentityNumber='" + identityNumber + "',TelephoneNumber='" + telephoneNumber + "',Email='" + email + "',BankAccountNumber='" + bankAccountNumber + "',BankName='" + bankName + "',IsManage='" + isManage + "',Salary='" + salary + "',Tax='" + tax + "' WHERE EmployeeID='" + employeeID + "'";
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh
             int number = statement.executeUpdate(sql);
-            if (number > 0){
+            //Thực hiện đóng kết nối
+            statement.close();
+            if (number > 0) {
                 return true;
             }
         } catch (Exception ex) {
@@ -317,18 +489,26 @@ public class Employee {
             ex.printStackTrace();
         }
 
-
-        return  false;
+        return false;
     }
 
-    public boolean deleteEmployee(){
+    /**
+     * Xóa nhân viên
+     * @return true nếu xóa thành công
+     */
+    public boolean deleteEmployee() {
         try {
 
-            Connection connection = MySQLConnection.getConnection();
-            Statement statement = connection.createStatement();
-           String sql = "DELETE FROM employee WHERE EmployeeID='"+employeeID+"'";
+            //Chuẩn bị câu lệnh truy vấn
+            String sql = "DELETE FROM employee WHERE EmployeeID='" + employeeID + "'";
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh hưởng
             int number = statement.executeUpdate(sql);
-            if (number > 0){
+            //Thực hiện đóng kết nối
+            statement.close();
+
+            if (number > 0) {
                 return true;
             }
         } catch (Exception ex) {
@@ -337,7 +517,100 @@ public class Employee {
         }
 
 
-        return  false;
+        return false;
+    }
+
+    /**
+     * Chuyển phòng ban cho nhân viên (Nếu là trưởng phòng cũ thì cần xóa đi)
+     * @param departmentID ID phòng ban muốn chuyển tới
+     * @return true nếu chuyển phòng ban cho nhân viên thành công
+     */
+    public boolean updateDepartmentEmployee(String departmentID) {
+        try {
+
+          //Chuẩn bị câu lệnh truy vấn
+            String sql = "UPDATE  employee SET DepartmentID='" + departmentID + "' , IsManage = null where EmployeeID='" + employeeID + "'";
+            //Khởi tạo kết nối đến DB
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh
+            int number = statement.executeUpdate(sql);
+            //Thực hiện đóng kết nối
+            statement.close();
+
+            if (number > 0) {
+                return true;
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+
+        }
+        return false;
+
+
+
+    }
+
+    /**
+     * Bổ nhiệm trưởng phòng
+     * @return true nếu thực hiện thành công
+     */
+    public boolean updateManageEmployee() {
+        try {
+
+           //Chuẩn bị câu lệnh truy ấn
+            String sql1 = "UPDATE  employee SET  IsManage = null where DepartmentID='" + departmentID + "' AND IsManage = 1 ;";
+
+              String sql2   =   "UPDATE employee SET IsManage =1 where EmployeeID='" + employeeID + "';";
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh
+            int number = statement.executeUpdate(sql1);
+            //Thực hiện đóng kết nối
+
+            if (number > 0) {
+                int number2=statement.executeUpdate(sql2);
+                if(number2>0){
+                    return true;
+                }
+                return false;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return false;
+    }
+
+
+    /**
+     * Xóa nhân viên khỏi phòng ban
+     * @return true nếu xóa thành công
+     */
+    public boolean releaseEmployeeFromDepartment() {
+        try {
+
+            //chuẩn bị câu lệnh truy vấn
+            String sql = "UPDATE  employee SET DepartmentID=null , IsManage = null where EmployeeID='" + employeeID + "'";
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh hưởng
+            int number = statement.executeUpdate(sql);
+            //Thực hiện đóng kết nối
+            statement.close();
+            if (number > 0) {
+                return true;
+            }
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return false;
     }
 
 

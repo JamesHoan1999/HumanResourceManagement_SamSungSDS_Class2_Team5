@@ -2,6 +2,7 @@ package base;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 
 public class MySQLConnection {
 
@@ -19,6 +20,23 @@ public class MySQLConnection {
         }
         return null;
     }
+
+
+        public static Statement  getStatement(){
+        try {
+            Class.forName(jdbcDriver);
+            Connection connection= DriverManager.getConnection(url,username,password);
+            Statement statement=connection.createStatement();
+            return statement;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
 
 
 

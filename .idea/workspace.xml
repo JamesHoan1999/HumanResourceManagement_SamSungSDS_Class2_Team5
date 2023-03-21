@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f43eb301-840c-4d2b-8b99-4b40d6fc0bc8" name="Changes" comment="4th">
-      <change afterPath="$PROJECT_DIR$/src/base/MethodBase.java" afterDir="false" />
+    <list default="true" id="f43eb301-840c-4d2b-8b99-4b40d6fc0bc8" name="Changes" comment="Done CRUD employee">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/MethodBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/MethodBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/base/MySQLConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/MySQLConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Department.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/program/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/program/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/DepartmentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/EmployeeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679301228214</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Done CRUD employee">
+      <created>1679328362118</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679328362118</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -154,7 +164,8 @@
     <MESSAGE value="Employee" />
     <MESSAGE value="3rd" />
     <MESSAGE value="4th" />
-    <option name="LAST_COMMIT_MESSAGE" value="4th" />
+    <MESSAGE value="Done CRUD employee" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done CRUD employee" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -173,18 +184,8 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/service/EmployeeService.java</url>
-          <line>101</line>
+          <line>143</line>
           <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/entity/Employee.java</url>
-          <line>283</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/entity/Employee.java</url>
-          <line>284</line>
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

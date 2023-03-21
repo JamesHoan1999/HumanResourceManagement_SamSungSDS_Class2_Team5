@@ -1,6 +1,7 @@
 package service;
 
 import entity.Department;
+import entity.Employee;
 
 import java.util.List;
 import java.util.Scanner;
@@ -115,4 +116,187 @@ public class DepartmentService {
              System.out.println("Xóa phòng ban thất bại !Vì vẫn tồn tại nhân viên thuộc phòng ban này !");
          }
     }
+
+    /*
+    Thêm nhân viên vào phòng ban
+     */
+    public static void  insertEmployeeToDepartment(){
+
+        getAllDepartment();
+        System.out.println("Vui lòng nhập số thứ tự phòng ban muốn thêm nhân viên");
+        int stt = new Scanner(System.in).nextInt();
+        stt = stt -1;
+        List<Department> departments = Department.getAllDepartment();
+
+       Department department = departments.get(stt);
+       List<Employee> employeeList = Employee.getEmployeesHasNotDepartmentID();
+
+
+        System.out.println("Danh sách nhân viên chưa có phòng ban");
+       EmployeeService.showListEmployee(employeeList);
+
+        System.out.println("Vui lòng nhập số thứ tự nhân viên  ban muốn thêm vào phòng ban");
+        int stt2 = new Scanner(System.in).nextInt();
+        stt2 = stt2 -1;
+
+
+        Employee employee = employeeList.get(stt2);
+
+        if(employee.updateDepartmentEmployee(department.getDepartmentID())){
+            System.out.println("Thêm nhân viên vào phòng ban thành công");
+        }
+        else{
+            System.out.println("Thêm nhân viên vào phòng ban thất bại");
+        }
+
+    }
+
+
+    //Xóa nhân viên khỏi phòng ban
+    public static void  releaseEmployeeFromDepartment(){
+
+        getAllDepartment();
+        System.out.println("Vui lòng nhập số thứ tự phòng ban muốn xóa nhân viên");
+        int stt = new Scanner(System.in).nextInt();
+        stt = stt -1;
+        List<Department> departments = Department.getAllDepartment();
+
+        Department department = departments.get(stt);
+        System.out.println("Bạn đang ở phòng ban : " + department.getDepartmentName());
+
+        //Lấy ra danh sách nhân viên thuộc phòng ban
+        List<Employee> employeeList = Employee.getEmployeesByDepartmentID(department.getDepartmentID());
+
+
+        System.out.println("Danh sách nhân viên thuộc phòng ban thuộc phòng ban này");
+        EmployeeService.showListEmployee(employeeList);
+
+        System.out.println("Vui lòng nhập số thứ tự nhân viên  ban muốn xóa khỏi phòng ban");
+        int stt2 = new Scanner(System.in).nextInt();
+        stt2 = stt2 -1;
+
+
+        Employee employee = employeeList.get(stt2);
+
+        if(employee.releaseEmployeeFromDepartment()){
+            System.out.println("Xóa nhân viên vào phòng ban thành công");
+        }
+        else{
+            System.out.println("Xóa nhân viên khỏi phòng ban thất bại");
+        }
+
+    }
+
+
+    //Điều chuyển  nhân viên khỏi phòng ban
+    public static void  updateDepartmentForEmployee(){
+
+        getAllDepartment();
+        System.out.println("Vui lòng nhập số thứ tự phòng ban đang muốn điều chuyển nhân viên");
+        int stt = new Scanner(System.in).nextInt();
+        stt = stt -1;
+        List<Department> departments = Department.getAllDepartment();
+
+        Department department = departments.get(stt);
+        System.out.println("Bạn đang ở phòng ban : " + department.getDepartmentName());
+
+        //Lấy ra danh sách nhân viên thuộc phòng ban
+        List<Employee> employeeList = Employee.getEmployeesByDepartmentID(department.getDepartmentID());
+
+
+        System.out.println("Danh sách nhân viên thuộc phòng ban thuộc phòng ban này");
+        EmployeeService.showListEmployee(employeeList);
+
+        System.out.println("Vui lòng nhập số thứ tự nhân viên  ban muốn xóa khỏi phòng ban");
+        int stt2 = new Scanner(System.in).nextInt();
+        stt2 = stt2 -1;
+
+
+        Employee employee = employeeList.get(stt2);
+
+
+        System.out.println("Vui lòng nhập số thứ tự phòng để điều chuyển nhân viên đến");
+        int stt3 = new Scanner(System.in).nextInt();
+        stt3 = stt3 -1;
+
+        Department departmentNew = departments.get(stt3);
+
+
+        if(employee.updateDepartmentEmployee(departmentNew.getDepartmentID())){
+            System.out.println("Điều chuyển nhân viên thành công");
+        }
+        else{
+            System.out.println("Điều chuyển nhân viên thất bại");
+        }
+
+    }
+
+
+    //Bổ nhiệm trưởng phòng
+    public static void  updateManageForDepartment(){
+
+        getAllDepartment();
+        System.out.println("Vui lòng nhập số thứ tự phòng ban đang muốn bổ nhiệm trưởng phòng");
+        int stt = new Scanner(System.in).nextInt();
+        stt = stt -1;
+        List<Department> departments = Department.getAllDepartment();
+
+        Department department = departments.get(stt);
+        System.out.println("Bạn đang ở phòng ban : " + department.getDepartmentName());
+
+        //Lấy ra danh sách nhân viên thuộc phòng ban
+        List<Employee> employeeList = Employee.getEmployeesByDepartmentID(department.getDepartmentID());
+
+
+        System.out.println("Danh sách nhân viên thuộc phòng ban thuộc phòng ban này");
+        EmployeeService.showListEmployee(employeeList);
+
+        System.out.println("Vui lòng nhập số thứ tự nhân viên  muốn bổ nhiệm làm trưởng phòng");
+        int stt2 = new Scanner(System.in).nextInt();
+        stt2 = stt2 -1;
+
+
+        Employee employee = employeeList.get(stt2);
+
+
+
+
+
+        if(employee.updateManageEmployee()){
+            System.out.println("Bổ nhiệm trưởng phòng thành công");
+        }
+        else{
+            System.out.println("Bổ nhiệm trưởng phòng thất bại");
+        }
+
+    }
+
+
+    //Hiển thị danh sách nhân viên theo phòng ban
+    public static void  showListEmployeeByDepartment(){
+
+        getAllDepartment();
+        System.out.println("Vui lòng nhập số thứ tự phòng ban đang muốn hiển thị nhân viên");
+        int stt = new Scanner(System.in).nextInt();
+        stt = stt -1;
+        List<Department> departments = Department.getAllDepartment();
+
+        Department department = departments.get(stt);
+        System.out.println("Bạn đang ở phòng ban : " + department.getDepartmentName());
+
+        //Lấy ra danh sách nhân viên thuộc phòng ban
+        List<Employee> employeeList = Employee.getEmployeesByDepartmentID(department.getDepartmentID());
+
+
+        System.out.println("Danh sách nhân viên thuộc phòng ban thuộc phòng ban này");
+        EmployeeService.showListEmployee(employeeList);
+
+
+
+    }
+
+
+
+
+
 }

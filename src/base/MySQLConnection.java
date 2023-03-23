@@ -9,11 +9,11 @@ public class MySQLConnection {
     private static final  String jdbcDriver="com.mysql.cj.jdbc.Driver";
     private static final  String url="jdbc:mysql://localhost:3306/human_resource_management";
     private static final  String username="root";
-    private static final  String password="999999999";
+    private static final  String password="root";
 
     public static Connection getConnection(){
         try {
-            Class.forName(jdbcDriver);
+            Class. forName(jdbcDriver);
             return DriverManager.getConnection(url,username,password);
         } catch (Exception e) {
             e.printStackTrace();

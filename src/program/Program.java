@@ -184,7 +184,7 @@ public class Program {
         System.out.println("Nhập thông tin password :");
         String password = scanner.nextLine();
 
-        boolean isLogin = User.checkLogin(username, password);
+            boolean isLogin = User.checkLogin(username, password);
 
         while (!isLogin) {
             System.out.println("Đăng nhập không thành công .Vui lòng thử lại !");

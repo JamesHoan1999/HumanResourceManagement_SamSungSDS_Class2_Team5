@@ -193,6 +193,7 @@ public class MethodBase {
 
 
 
+
     /**
      * convert ngày tháng dạng chuỗi sang kiểu Date
      * @param dateString ngày tháng dạng chuỗi
@@ -221,8 +222,7 @@ public class MethodBase {
     public static String convertGender(int gender) {
         if (gender == 0) {
             return "Nam";
-        } else if (gender == 1) {
-            return "Nữ";
+        } else if (gender == 1) {return "Nữ";
         } else {
             return "Khác";
         }

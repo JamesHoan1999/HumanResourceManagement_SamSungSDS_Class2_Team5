@@ -4,15 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f43eb301-840c-4d2b-8b99-4b40d6fc0bc8" name="Changes" comment="Done CRUD employee">
+    <list default="true" id="f43eb301-840c-4d2b-8b99-4b40d6fc0bc8" name="Changes" comment="CRUD">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_20.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_20.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/base/MethodBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/MethodBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/base/MySQLConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/MySQLConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/Department.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Department.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Employee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/login/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/program/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/program/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/DepartmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/EmployeeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,17 +42,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/jar_files/mysql-connector-java-8.0.20.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
-  }
-}</component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+  </component>
   <component name="RunManager" selected="Application.Program">
     <configuration name="Program" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="program.Program" />
@@ -88,6 +85,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1678980727563</updated>
+      <workItem from="1679493338292" duration="2031000" />
+      <workItem from="1679545144970" duration="289000" />
     </task>
     <task id="LOCAL-00001" summary="CRUD">
       <created>1679134765299</created>
@@ -138,15 +137,11 @@
       <option name="project" value="LOCAL" />
       <updated>1679301228214</updated>
     </task>
-    <task id="LOCAL-00008" summary="Done CRUD employee">
-      <created>1679328362118</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1679328362118</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -158,14 +153,14 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="CRUD" />
     <MESSAGE value="Employee" />
     <MESSAGE value="3rd" />
     <MESSAGE value="4th" />
-    <MESSAGE value="Done CRUD employee" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done CRUD employee" />
+    <option name="LAST_COMMIT_MESSAGE" value="4th" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -184,7 +179,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/service/EmployeeService.java</url>
-          <line>143</line>
+          <line>101</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

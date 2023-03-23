@@ -22,8 +22,8 @@ public class User {
                 return true;
             }
         } catch (Exception ex) {
-            System.out.println("Error : fail");
-            ex.printStackTrace();
+//            System.out.println("Error : fail");
+//            ex.printStackTrace();
         }
         return false;
     }

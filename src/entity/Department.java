@@ -184,6 +184,7 @@ public class Department {
             }
         } catch (Exception SQLIntegrityConstraintViolationException) {
 
+
             return false;
 
         }

@@ -13,6 +13,8 @@ public class Program {
 
 
     public static void homePage() throws ParseException {
+        System.out.println("------------------------------------------------------------------------------------------------");
+
 
 
         System.out.println("Danh sách danh mục :");
@@ -21,18 +23,19 @@ public class Program {
         System.out.println("3.Logout");
         System.out.println("Nhập số từ 1 đến 3 để vào mục tiếp theo");
 
-        int choice = MethodBase.getNumberScanner();
+        int choice = MethodBase.getNumberFromMinToMax(1,3);
 
-        while ( choice > 3 ||choice<1){
-            System.out.println("Bạn nhập không hợp lệ .Vui lòng nhập lại số từ 1 đến 3");
-            choice=MethodBase.getNumberScanner();
-        }
+
+        System.out.println("------------------------------------------------------------------------------------------------");
+
 
         feature(choice);
 
     }
 
     public static void  feature(int option) throws ParseException {
+        System.out.println("------------------------------------------------------------------------------------------------");
+
         Scanner sc= new Scanner(System.in);
         switch (option){
             case 1:
@@ -45,12 +48,7 @@ public class Program {
                 System.out.println("5.Tìm kiếm nhân viên theo mã ,tên ,sdt hoặc email");
                 System.out.println("0.Quay lại ");
                 System.out.println("Nhập số từ 0 đến 5 để thực hiện chức năng tương ứng : ");
-                int options=MethodBase.getNumberScanner();
-                while (options >5 || options < 0){
-                    System.out.println("Bạn nhập không hợp lệ.Vui lòng nhập lại số từ 0 đến 5");
-                    options=MethodBase.getNumberScanner();
-                }
-
+                int options=MethodBase.getNumberFromMinToMax(0,5);
                 featureEmployee(options);
 
                 break;
@@ -70,11 +68,7 @@ public class Program {
                 System.out.println("0.Quay lại ");
 
                 System.out.println("Nhập số từ 0 đến 9 để thực hiện chức năng tương ứng : ");
-                int optionsDepartment= MethodBase.getNumberScanner();
-                while (optionsDepartment >9 || optionsDepartment < 0){
-                    System.out.println("Bạn nhập không hợp lệ.Vui lòng nhập lại số từ 0 đến 4");
-                    optionsDepartment=MethodBase.getNumberScanner();
-                }
+                int optionsDepartment= MethodBase.getNumberFromMinToMax(0,9);
                 featureDepartment(optionsDepartment);
 
                 break;
@@ -82,6 +76,8 @@ public class Program {
                 System.out.println("Đăng xuất");
                 break;
         }
+        System.out.println("------------------------------------------------------------------------------------------------");
+
 
     }
 

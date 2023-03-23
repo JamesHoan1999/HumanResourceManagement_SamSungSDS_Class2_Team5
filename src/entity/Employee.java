@@ -569,13 +569,14 @@ public class Employee {
             int number = statement.executeUpdate(sql1);
             //Thực hiện đóng kết nối
 
-            if (number > 0) {
+
                 int number2=statement.executeUpdate(sql2);
                 if(number2>0){
                     return true;
                 }
                 return false;
-            }
+
+            //Thực hiện đóng kết nối
         } catch (Exception ex) {
             System.out.println("Error : fail");
             ex.printStackTrace();
@@ -609,6 +610,114 @@ public class Employee {
             ex.printStackTrace();
         }
 
+
+        return false;
+    }
+
+    /**
+     * kiểm tra xem email đã tồn tại trong hệ thống chưa
+     * @param email
+     * @param id
+     * @return boolean
+     */
+    public static  boolean checkDuplicateEmail(String email ,  String id ){
+        try {
+
+            //chuẩn bị câu lệnh truy vấn
+            String sql="";
+            if(id==null){
+              sql = "SELECT * FROM employee WHERE email = '" + email + "' ";
+            }
+            else {
+                sql = "SELECT * FROM employee WHERE email = '" + email + "' AND EmployeeID != '" + id + "'";
+
+            }
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh hưởng
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                return true;
+            }
+            //Thực hiện đóng kết nối
+            statement.close();
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+
+
+        return false;
+    }
+
+    /**
+     * Kiểm tra mã nhân viên tồn tại trong hệ thống chưa
+     * @param empCode
+     * @param id
+     * @return
+     */
+    public static  boolean checkDuplicateCode(String empCode ,  String id ){
+        try {
+
+            //chuẩn bị câu lệnh truy vấn
+            String sql="";
+            if(id==null){
+              sql = "SELECT * FROM employee WHERE EmployeeCode = '" + empCode + "' ";
+            }
+            else {
+                sql = "SELECT * FROM employee WHERE EmployeeCode = '" + empCode + "' AND EmployeeID != '" + id + "'";
+
+            }
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh hưởng
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                return true;
+            }
+            //Thực hiện đóng kết nối
+            statement.close();
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * Kiểm tra số cccd nhân viên tồn tại trong hệ thống chưa
+     * @param identityNumber
+     * @param id
+     *
+     */
+    public static  boolean checkDuplicateIdentityNumber(String identityNumber ,  String id ){
+        try {
+
+            //chuẩn bị câu lệnh truy vấn
+            String sql="";
+            if(id==null){
+              sql = "SELECT * FROM employee WHERE IdentityNumber = '" + identityNumber + "' ";
+            }
+            else {
+                sql = "SELECT * FROM employee WHERE IdentityNumber = '" + identityNumber + "' AND EmployeeID != '" + id + "'";
+
+            }
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh hưởng
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                return true;
+            }
+            //Thực hiện đóng kết nối
+            statement.close();
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
 
         return false;
     }

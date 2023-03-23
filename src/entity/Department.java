@@ -193,4 +193,42 @@ public class Department {
     }
 
 
+
+
+    /**
+     * Kiểm tra mã phòng ban tồn tại trong hệ thống chưa
+     * @param empCode
+     * @param id
+     * @return
+     */
+    public static  boolean checkDuplicateCode(String departCode ,  String id ){
+        try {
+
+            //chuẩn bị câu lệnh truy vấn
+            String sql="";
+            if(id==null){
+                sql = "SELECT * FROM department WHERE DepartmentCode = '" + departCode + "' ";
+            }
+            else {
+                sql = "SELECT * FROM department WHERE DepartmentCode = '" + departCode + "' AND EmployeeID != '" + id + "'";
+
+            }
+            //Khởi tạo kết nối đến database
+            Statement statement = MySQLConnection.getStatement();
+            //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh hưởng
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            if (resultSet.next()) {
+                return true;
+            }
+            //Thực hiện đóng kết nối
+            statement.close();
+        } catch (Exception ex) {
+            System.out.println("Error : fail");
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+
 }

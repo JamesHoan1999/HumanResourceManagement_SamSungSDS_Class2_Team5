@@ -5,6 +5,7 @@ import entity.Department;
 import entity.Employee;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,7 +32,7 @@ public class EmployeeService {
                     employee.getEmployeeName(),employee.getDepartmentName(),employee.getPositionName(),employee.getAddress(),
                     employee.getDateOfBirth(), MethodBase.convertGender(employee.getGender()),employee.getTelephoneNumber(),employee.getEmail(),
                     employee.getBankAccountNumber(),employee.getBankName(),
-                    employee.getSalary(),employee.getTax(),MethodBase.stringIsManage(employee.getIsManage()));
+                    NumberFormat.getCurrencyInstance().format(employee.getSalary()),NumberFormat.getCurrencyInstance().format(employee.getTax()),MethodBase.stringIsManage(employee.getIsManage()));
             System.out.println();
             count++;
         }
@@ -59,7 +60,7 @@ public class EmployeeService {
                    employee.getEmployeeName(),employee.getDepartmentName(),employee.getPositionName(),employee.getAddress(),
                    employee.getDateOfBirth(), MethodBase.convertGender(employee.getGender()),employee.getTelephoneNumber(),employee.getEmail(),
                    employee.getBankAccountNumber(),employee.getBankName(),
-                   employee.getSalary(),employee.getTax(),MethodBase.stringIsManage(employee.getIsManage()));
+                   NumberFormat.getCurrencyInstance().format(employee.getSalary()),NumberFormat.getCurrencyInstance().format(employee.getTax()),MethodBase.stringIsManage(employee.getIsManage()));
            System.out.println();
            count++;
        }
@@ -88,7 +89,7 @@ public class EmployeeService {
                        employee.getEmployeeName(),employee.getDepartmentName(),employee.getPositionName(),employee.getAddress(),
                        employee.getDateOfBirth(), MethodBase.convertGender(employee.getGender()),employee.getTelephoneNumber(),employee.getEmail(),
                        employee.getBankAccountNumber(),employee.getBankName(),
-                       employee.getSalary(),employee.getTax(),MethodBase.stringIsManage(employee.getIsManage()));
+                       NumberFormat.getCurrencyInstance().format(employee.getSalary()),NumberFormat.getCurrencyInstance().format(employee.getTax()),MethodBase.stringIsManage(employee.getIsManage()));
                System.out.println();
                count++;
            }

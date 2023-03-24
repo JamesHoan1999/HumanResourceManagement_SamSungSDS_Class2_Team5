@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="HumanResourceManagement_SamSungSDS_Class2_Team5:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f8b3277b-8149-4409-8b93-debf352bc6f6" name="Changes" comment="Validate duplicate">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+    <list default="true" id="f8b3277b-8149-4409-8b93-debf352bc6f6" name="Changes" comment="Validate format">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/HumanResourceManagement_SamSungSDS_Class2_Team5_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_20.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/Statistics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/enumCommon/SortEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/StatisticsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HumanResourceManagement_SamSungSDS_Class2_Team5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Nhóm_05.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/MethodBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/MethodBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/base/MySQLConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/base/MySQLConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/program/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/program/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/EmployeeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/EmployeeService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,16 +53,17 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/jar_files/mysql-connector-java-8.0.20.jar",
-    "project.structure.last.edited": "Project",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "D:/Class2/Project_Human_Resource_Management_Nhom5/Nhom_05",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Program">
     <configuration name="Program" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="program.Program" />
-      <module name="HumanResourceManagement_SamSungSDS_Class2_Team5" />
+      <module name="Nhóm_05" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="program.*" />
@@ -56,9 +74,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Test" />
+      <module name="Nhóm_05" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Program" />
+        <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
   </component>
@@ -78,7 +104,14 @@
       <option name="presentableId" value="Default" />
       <updated>1679620395155</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Validate format">
+      <created>1679624581505</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1679624581505</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -94,6 +127,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Validate duplicate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Validate duplicate" />
+    <MESSAGE value="Validate format" />
+    <option name="LAST_COMMIT_MESSAGE" value="Validate format" />
   </component>
 </project>

@@ -1,9 +1,11 @@
 package program;
 
 import base.MethodBase;
+import entity.Statistics;
 import login.User;
 import service.DepartmentService;
 import service.EmployeeService;
+import service.StatisticsService;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -20,15 +22,12 @@ public class Program {
         System.out.println("Danh sách danh mục :");
         System.out.println("1.Danh mục nhân viên  ");
         System.out.println("2.Danh mục phòng ban ");
-
-        System.out.println("3.Logout");
+        System.out.println("3.Thống kê");
+        System.out.println("4.Logout");
         System.out.println("Nhập số từ 1 đến 3 để vào mục tiếp theo");
 
-        int choice = MethodBase.getNumberFromMinToMax(1,3);
-
-
+        int choice = MethodBase.getNumberFromMinToMax(1,4);
         System.out.println("------------------------------------------------------------------------------------------------");
-
 
         feature(choice);
 
@@ -73,7 +72,26 @@ public class Program {
                 featureDepartment(optionsDepartment);
 
                 break;
-            case 3:
+
+            case  3:
+                System.out.println("Bạn đã đến thống kê");
+                System.out.println("Danh sách chức năng ");
+                System.out.println("1.Hiển thị top 5 nhân viên lương cao nhất");
+                System.out.println("2.Hiển thị top 5 nhân viên lương thấp nhất");
+
+
+                System.out.println("3.Thống kê số lượng nhân viên mỗi phòng");
+                System.out.println("4.Thống kê tiền lương trung bình mỗi phòng ban");
+
+                System.out.println("0.Quay lại ");
+
+                System.out.println("Nhập số từ 0 đến 4 để thực hiện chức năng tương ứng : ");
+                int optionsStatistics= MethodBase.getNumberFromMinToMax(0,4);
+                featureStatistics(optionsStatistics);
+
+                break;
+
+            case 4:
                 System.out.println("Đăng xuất");
                 break;
         }
@@ -111,6 +129,37 @@ public class Program {
             EmployeeService.searchEmployee();
             feature(1);
         }
+        else if (fea==0) {
+            System.out.println("Back");
+            homePage();
+        }
+    }
+
+    public static void featureStatistics(int fea) throws ParseException {
+        if (fea==1){
+            System.out.println("Hiển thị top 5 nhân viên lương cao nhất");
+            StatisticsService.showTopEmployee();
+            feature(3);
+
+        }
+        else if (fea==2) {
+
+            System.out.println("Hiển thị top 5 nhân viên lương thấp nhất");
+            StatisticsService.showTopDownEmployee();
+            feature(3);
+        }
+        else if (fea==3) {
+            System.out.println("Thống kê số lượng nhân viên mỗi phòng");
+            Statistics.showQuantityEmployeeOfDepartment();
+            feature(3);
+
+        }
+        else if (fea==4) {
+            System.out.println("Thống kê top  phòng ban có lương trung bình cao nhất");
+            Statistics.showTopDepartmentSalary();
+            feature(3);
+        }
+
         else if (fea==0) {
             System.out.println("Back");
             homePage();

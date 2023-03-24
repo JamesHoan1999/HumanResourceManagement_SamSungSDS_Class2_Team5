@@ -437,12 +437,27 @@ public class Employee {
     public boolean insertEmployee() {
         try {
 
+            String sql="";
+            java.sql.Date date = null;
 
-            //Chuyển kiểu date java về date sql
-            java.sql.Date date = new java.sql.Date(dateOfBirth.getTime());
+            if (dateOfBirth!=null ){
+                //Chuyển kiểu date java về date sql
+                date = new java.sql.Date(dateOfBirth.getTime());
+                sql = "INSERT INTO employee(EmployeeID,EmployeeCode,EmployeeName,DepartmentID,PositionName,Address,Gender,DateOfBirth,IdentityNumber,TelephoneNumber,Email,BankAccountNumber,BankName,IsManage,Salary,Tax) " +
+                        " Values ('" + employeeID + "','" + employeeCode + "','" + employeeName + "','" + departmentID + "','" + positionName + "','" + address + "'," + gender + ",'" + date + "','" + identityNumber + "','" + telephoneNumber + "','" + email + "','" + bankAccountNumber + "','" + bankName + "'," + isManage + ",'" + salary + "','" + tax + "')";
+
+            }
+            else {
+                sql = "INSERT INTO employee(EmployeeID,EmployeeCode,EmployeeName,DepartmentID,PositionName,Address,Gender,IdentityNumber,TelephoneNumber,Email,BankAccountNumber,BankName,IsManage,Salary,Tax) " +
+                        " Values ('" + employeeID + "','" + employeeCode + "','" + employeeName + "','" + departmentID + "','" + positionName + "','" + address + "'," + gender  + ",'" + identityNumber + "','" + telephoneNumber + "','" + email + "','" + bankAccountNumber + "','" + bankName + "'," + isManage + ",'" + salary + "','" + tax + "')";
+            }
+
+
+
+
+
             //Chuẩn bị câu lệnh truy vấn
-            String sql = "INSERT INTO employee(EmployeeID,EmployeeCode,EmployeeName,DepartmentID,PositionName,Address,Gender,DateOfBirth,IdentityNumber,TelephoneNumber,Email,BankAccountNumber,BankName,IsManage,Salary,Tax) " +
-                    " Values ('" + employeeID + "','" + employeeCode + "','" + employeeName + "','" + departmentID + "','" + positionName + "','" + address + "'," + gender + ",'" + date + "','" + identityNumber + "','" + telephoneNumber + "','" + email + "','" + bankAccountNumber + "','" + bankName + "'," + isManage + ",'" + salary + "','" + tax + "')";
+
             //Khởi tạo kết nối đến Database
             Statement statement = MySQLConnection.getStatement();
             //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh hưởng
@@ -469,12 +484,21 @@ public class Employee {
      */
     public boolean updateEmployee() {
         try {
+            String sql="";
+            java.sql.Date date = null;
 
+            if (dateOfBirth!=null ){
+                //Chuyển kiểu date java về date sql
+                date = new java.sql.Date(dateOfBirth.getTime());
+                sql = "UPDATE employee SET EmployeeCode='" + employeeCode + "',EmployeeName='" + employeeName + "',DepartmentID='" + departmentID + "',PositionName='" + positionName + "',Address='" + address + "',DateOfBirth='" + date + "',IdentityNumber='" + identityNumber + "',TelephoneNumber='" + telephoneNumber + "',Email='" + email + "',BankAccountNumber='" + bankAccountNumber + "',BankName='" + bankName + "',IsManage='" + isManage + "',Salary='" + salary + "',Tax='" + tax + "' WHERE EmployeeID='" + employeeID + "'";
 
-            //Chuyển kiểu date java về date sql
-            java.sql.Date date = new java.sql.Date(dateOfBirth.getTime());
+            }
+            else {
+                sql = "UPDATE employee SET EmployeeCode='" + employeeCode + "',EmployeeName='" + employeeName + "',DepartmentID='" + departmentID + "',PositionName='" + positionName + "',Address='" + address + "',IdentityNumber='" + identityNumber + "',TelephoneNumber='" + telephoneNumber + "',Email='" + email + "',BankAccountNumber='" + bankAccountNumber + "',BankName='" + bankName + "',IsManage='" + isManage + "',Salary='" + salary + "',Tax='" + tax + "' WHERE EmployeeID='" + employeeID + "'";
+
+            }
+
             //Chuẩn bị câu lệnh truy vấn
-            String sql = "UPDATE employee SET EmployeeCode='" + employeeCode + "',EmployeeName='" + employeeName + "',DepartmentID='" + departmentID + "',PositionName='" + positionName + "',Address='" + address + "',DateOfBirth='" + date + "',IdentityNumber='" + identityNumber + "',TelephoneNumber='" + telephoneNumber + "',Email='" + email + "',BankAccountNumber='" + bankAccountNumber + "',BankName='" + bankName + "',IsManage='" + isManage + "',Salary='" + salary + "',Tax='" + tax + "' WHERE EmployeeID='" + employeeID + "'";
             //Khởi tạo kết nối đến database
             Statement statement = MySQLConnection.getStatement();
             //Thực hiện truy vấn vào DB và lấy ra  số bản ghi bị ảnh

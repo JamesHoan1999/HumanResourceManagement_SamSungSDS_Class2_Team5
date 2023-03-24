@@ -103,10 +103,11 @@ public class MethodBase {
 
         Scanner scanner = new Scanner(System.in);
         String email = scanner.nextLine();
-        if(email.trim().equals("")){
-            return "";
-        }
+
         while (!checkFormat(email,regexPattern)) {
+            if(email.trim().equals("")){
+                return "";
+            }
             System.out.println(" Bạn nhập không phải là email!Vui lòng nhập lại");
             email = scanner.nextLine();
         }
@@ -123,10 +124,12 @@ public class MethodBase {
 
         Scanner scanner = new Scanner(System.in);
         String phoneNumber = scanner.nextLine();
-        if(phoneNumber.trim().equals("")){
-            return "";
-        }
+
         while (!checkFormat(phoneNumber,regexPattern)) {
+
+            if(phoneNumber.trim().equals("")){
+                return "";
+            }
             System.out.println(" Bạn nhập sdt không hợp lệ!Vui lòng nhập lại");
             phoneNumber = scanner.nextLine();
         }
@@ -142,10 +145,11 @@ public class MethodBase {
 
         Scanner scanner = new Scanner(System.in);
         String number = scanner.nextLine();
-        if(number.trim().equals("")){
-            return "";
-        }
+
         while (!checkFormat(number,regexPattern)) {
+            if(number.trim().equals("")){
+                return "";
+            }
             System.out.println(" Bạn nhập  không hợp lệ!Vui lòng nhập lại");
             number = scanner.nextLine();
         }
@@ -168,12 +172,14 @@ public class MethodBase {
 
         Scanner scanner = new Scanner(System.in);
         String dateString = scanner.nextLine();
-        if(dateString.trim().equals("")){
-            return "";
-        }
+
         while (!checkFormat(dateString,regexPattern)) {
+            if(dateString.trim().equals("")){
+                return "";
+            }
             System.out.println(" Ngày tháng bạn nhập không hợp lệ!Vui lòng nhập lại");
             dateString = scanner.nextLine();
+
         }
 
         return  dateString;
@@ -202,6 +208,9 @@ public class MethodBase {
     public static Date convertDate(String dateString) {
 
         Date date = null;
+        if(dateString.trim().equals("")){
+            return null;
+        }
 
         try {
             date = new SimpleDateFormat("yyyy-MM-dd" ).parse(dateString);

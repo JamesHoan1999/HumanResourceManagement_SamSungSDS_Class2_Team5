@@ -20,6 +20,7 @@ public class Program {
         System.out.println("Danh sách danh mục :");
         System.out.println("1.Danh mục nhân viên  ");
         System.out.println("2.Danh mục phòng ban ");
+
         System.out.println("3.Logout");
         System.out.println("Nhập số từ 1 đến 3 để vào mục tiếp theo");
 

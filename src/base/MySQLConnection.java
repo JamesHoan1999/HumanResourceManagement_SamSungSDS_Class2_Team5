@@ -9,7 +9,7 @@ public class MySQLConnection {
     private static final  String jdbcDriver="com.mysql.cj.jdbc.Driver";
     private static final  String url="jdbc:mysql://localhost:3306/human_resource_management";
     private static final  String username="root";
-    private static final  String password="root";
+    private static final  String password="999999999";
 
     public static Connection getConnection(){
         try {

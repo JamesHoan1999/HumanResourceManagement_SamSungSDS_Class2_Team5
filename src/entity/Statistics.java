@@ -1,5 +1,6 @@
 package entity;
 
+import base.MethodBase;
 import base.MySQLConnection;
 import enumCommon.SortEnum;
 
@@ -70,7 +71,7 @@ public class Statistics {
         try {
 
             //Chuẩn bị câu lệnh truy vấn
-            String sql = "SELECT d.DepartmentName ,COUNT(e.Salary) AS employeeQuantity from employee e  JOIN department d ON  e.DepartmentID=d.DepartmentID GROUP BY  e.DepartmentID ORDER BY employeeQuantity DESC;";
+            String sql = "SELECT d.DepartmentName,COUNT(e.DepartmentID) AS employeeQuantity FROM department d  LEFT JOIN employee e ON  d.DepartmentID=e.DepartmentID  GROUP BY d.DepartmentID ORDER BY employeeQuantity ;";
             //Khởi tạo kết nối
             Statement statement = MySQLConnection.getStatement();
 
@@ -79,13 +80,22 @@ public class Statistics {
 
             //Khởi tại list nhân viên
             List<Employee> employeeList = new ArrayList<>();
+            System.out.println("-----------------------------------------------");
 
-            System.out.printf("%-20s%-20s", "Tên phòng ban", "Số lượng nhân viên");
+
+
+            System.out.printf("%-3s%-20s%-3s%-20s%-3s","|", "Tên phòng ban","|", "Số lượng nhân viên","|");
             System.out.println();
+            System.out.println("-----------------------------------------------");
+
+
             //lấy dữ liệu từ database rồi add vào employeeList
             while (resultSet.next()) {
-                System.out.printf("%-20s%-20s", resultSet.getString("DepartmentName"), resultSet.getInt("employeeQuantity"));
+                System.out.printf("%-3s%-20s%-3s%-20s%-3s","|", resultSet.getString("DepartmentName"),"|", resultSet.getInt("employeeQuantity"),"|");
                 System.out.println();
+                System.out.println("-----------------------------------------------");
+
+
             }
             //Thực hiện đóng kết nối
             statement.close();
@@ -102,11 +112,11 @@ public class Statistics {
     /**
      * @return Danh sách phòng ban
      */
-    public static void showTopDepartmentSalary() {
+    public static void showAVGDepartmentSalary() {
         try {
 
             //Chuẩn bị câu lệnh truy vấn
-            String sql = "SELECT d.DepartmentName ,AVG(e.Salary) AS AVGSalary from employee e  JOIN department d ON  e.DepartmentID=d.DepartmentID GROUP BY  e.DepartmentID ORDER BY AVGSalary DESC LIMIT 3;";
+            String sql = "SELECT d.DepartmentName,AVG(e.Salary) AS avgSalary FROM department d  LEFT JOIN employee e ON  d.DepartmentID=e.DepartmentID  GROUP BY d.DepartmentID ORDER BY avgSalary DESC;";
             //Khởi tạo kết nối
             Statement statement = MySQLConnection.getStatement();
 
@@ -115,13 +125,21 @@ public class Statistics {
 
             //Khởi tại list nhân viên
             List<Employee> employeeList = new ArrayList<>();
-            System.out.println("Top 3 phòng ban có lương trung bình cao nhất");
-            System.out.printf("%-20s%-20s", "Tên phòng ban", "Tiền lương trung bình");
+            System.out.println(" Lương trung bình của mỗi phòng ban");
+            System.out.println("-----------------------------------------------");
+
+            System.out.printf("%-3s%-20s%-3s%-20s%-3s","|", "Tên phòng ban","|", "Tiền lương trung bình","|");
             System.out.println();
+            System.out.println("-----------------------------------------------");
+
+
             //lấy dữ liệu từ database rồi add vào employeeList
             while (resultSet.next()) {
-                System.out.printf("%-20s%-20s", resultSet.getString("DepartmentName"), NumberFormat.getCurrencyInstance().format(resultSet.getDouble("AVGSalary")) );
+                System.out.printf("%-3s%-20s%-3s%-20s%-3s","|", resultSet.getString("DepartmentName"),"|", MethodBase.getSalaryString(resultSet.getDouble("avgSalary")),"|" );
                 System.out.println();
+                System.out.println("-----------------------------------------------");
+
+
             }
             //Thực hiện đóng kết nối
             statement.close();

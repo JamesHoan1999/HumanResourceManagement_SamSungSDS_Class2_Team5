@@ -14,6 +14,10 @@ import java.util.Scanner;
 public class Program {
 
 
+    /**
+     * Các danh mục chính của chương trình
+     * @throws ParseException
+     */
     public static void homePage() throws ParseException {
         System.out.println("------------------------------------------------------------------------------------------------");
 
@@ -24,7 +28,7 @@ public class Program {
         System.out.println("2.Danh mục phòng ban ");
         System.out.println("3.Thống kê");
         System.out.println("4.Logout");
-        System.out.println("Nhập số từ 1 đến 3 để vào mục tiếp theo");
+        System.out.println("Nhập số từ 1 đến 4 để vào mục tiếp theo");
 
         int choice = MethodBase.getNumberFromMinToMax(1,4);
         System.out.println("------------------------------------------------------------------------------------------------");
@@ -33,8 +37,13 @@ public class Program {
 
     }
 
+    /**
+     * Gọi đến danh mục tương ứng nằm trong menu chính
+     * @param option
+     * @throws ParseException
+     *
+     */
     public static void  feature(int option) throws ParseException {
-        System.out.println("------------------------------------------------------------------------------------------------");
 
         Scanner sc= new Scanner(System.in);
         switch (option){
@@ -95,11 +104,15 @@ public class Program {
                 System.out.println("Đăng xuất");
                 break;
         }
-        System.out.println("------------------------------------------------------------------------------------------------");
 
 
     }
 
+    /**
+     * Gọi đến các chức năng trong danh mục nhân viên
+     * @param fea
+     * @throws ParseException
+     */
     public static void featureEmployee(int fea) throws ParseException {
         if (fea==1){
             System.out.println("Hiển thị danh sách nhân viên");
@@ -135,6 +148,11 @@ public class Program {
         }
     }
 
+    /**
+     * Gọi đến các chức năng trong mục thống kê
+     * @param fea
+     * @throws ParseException
+     */
     public static void featureStatistics(int fea) throws ParseException {
         if (fea==1){
             System.out.println("Hiển thị top 5 nhân viên lương cao nhất");
@@ -156,7 +174,7 @@ public class Program {
         }
         else if (fea==4) {
             System.out.println("Thống kê top  phòng ban có lương trung bình cao nhất");
-            Statistics.showTopDepartmentSalary();
+            Statistics.showAVGDepartmentSalary();
             feature(3);
         }
 
@@ -166,6 +184,12 @@ public class Program {
         }
     }
 
+
+    /**
+     * Gọi đến các chức năng danh mục phòng ban
+     * @param fea
+     * @throws ParseException
+     */
     public static void featureDepartment(int fea) throws ParseException {
         if (fea==1){
             System.out.println("Hiển thị danh sách phòng ban");
@@ -236,6 +260,8 @@ public class Program {
 
             boolean isLogin = User.checkLogin(username, password);
 
+
+            //Check thông tin đăng nhập
         while (!isLogin) {
             System.out.println("Đăng nhập không thành công .Vui lòng thử lại !");
             System.out.println("Nhập thông tin username :");

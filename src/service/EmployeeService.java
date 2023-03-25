@@ -19,52 +19,48 @@ public class EmployeeService {
 
 
     public static void  showListEmployee(List<Employee> employeeList){
-        System.out.println("------------------------------------------------------------------------------------------------");
-        System.out.println("Danh sách nhân viên");
-        System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s","STT","Mã nhân viên",
-                "Tên nhân viên","Tên phòng ban","Vị trí","Địa chỉ","Ngày sinh","Giới tính","SĐT","Email","Số tk","Tên Ngân hàng",
-                "Tiền lương","Thuế","Là trưởng phòng");
-        System.out.println();
-        int count=1;
-        for(Employee employee : employeeList){
+        if(employeeList.size()>0){
+            System.out.println("Danh sách nhân viên");
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-            System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s",count,employee.getEmployeeCode(),
-                    employee.getEmployeeName(),employee.getDepartmentName(),employee.getPositionName(),employee.getAddress(),
-                    employee.getDateOfBirth(), MethodBase.convertGender(employee.getGender()),employee.getTelephoneNumber(),employee.getEmail(),
-                    employee.getBankAccountNumber(),employee.getBankName(),
-                    NumberFormat.getCurrencyInstance().format(employee.getSalary()),NumberFormat.getCurrencyInstance().format(employee.getTax()),MethodBase.stringIsManage(employee.getIsManage()));
+            System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s","|","STT","|","Mã nhân viên","|",
+                    "Tên nhân viên","|","Tên phòng ban","|","Vị trí","|","Địa chỉ","|","Ngày sinh","|","Giới tính","|","SĐT","|","Email","|","Số tk","|","Tên Ngân hàng","|",
+                    "Tiền lương","|","Thuế","|","Là trưởng phòng","|");
             System.out.println();
-            count++;
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+            int count=1;
+            for(Employee employee : employeeList){
+
+                System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s","|",count,"|",employee.getEmployeeCode(),"|",
+                        employee.getEmployeeName()==null ? "":employee.getEmployeeName(),"|",employee.getDepartmentName() ==null ?"":employee.getDepartmentName(),"|",employee.getPositionName()==null ? "":employee.getPositionName(),"|",employee.getAddress() ==null ? "" : employee.getAddress() ,"|"  ,
+                        employee.getDateOfBirth() ==null ? "":employee.getDateOfBirth(),"|", MethodBase.convertGender(employee.getGender()),"|",employee.getTelephoneNumber()==null ? "":employee.getTelephoneNumber(),"|",
+                        employee.getEmail()==null ? "": employee.getEmail(),"|",
+                        employee.getBankAccountNumber()==null ? "": employee.getBankAccountNumber(),"|",employee.getBankName()==null ? "": employee.getBankName(),"|",
+                        MethodBase.getSalaryString(employee.getSalary()),"|",MethodBase.getSalaryString(employee.getTax()),"|",MethodBase.stringIsManage(employee.getIsManage()),"|");
+                System.out.println();
+                System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+
+                count++;
+            }
+        }
+        else {
+            System.out.println("Không có  nhân viên");
         }
 
-        System.out.println("------------------------------------------------------------------------------------------------");
+
+
 
 
     }
 
 
     public static void getAllEmployee(){
-        System.out.println("------------------------------------------------------------------------------------------------");
+
 
        List<Employee> employeeList = Employee.getAllEmployees();
 
-        System.out.println("Danh sách nhân viên");
-        System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s","STT","Mã nhân viên",
-                "Tên nhân viên","Tên phòng ban","Vị trí","Địa chỉ","Ngày sinh","Giới tính","SĐT","Email","Số tk","Tên Ngân hàng",
-                "Tiền lương","Thuế","Là trưởng phòng");
-        System.out.println();
-        int count=1;
-       for(Employee employee : employeeList){
-
-           System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s",count,employee.getEmployeeCode(),
-                   employee.getEmployeeName(),employee.getDepartmentName(),employee.getPositionName(),employee.getAddress(),
-                   employee.getDateOfBirth(), MethodBase.convertGender(employee.getGender()),employee.getTelephoneNumber(),employee.getEmail(),
-                   employee.getBankAccountNumber(),employee.getBankName(),
-                   NumberFormat.getCurrencyInstance().format(employee.getSalary()),NumberFormat.getCurrencyInstance().format(employee.getTax()),MethodBase.stringIsManage(employee.getIsManage()));
-           System.out.println();
-           count++;
-       }
-        System.out.println("------------------------------------------------------------------------------------------------");
+        showListEmployee(employeeList);
 
     }
 
@@ -77,22 +73,7 @@ public class EmployeeService {
         String key = scanner.nextLine();
        List<Employee> employeeList = Employee.searchEmployees(key);
        if(employeeList.size()>0){
-           System.out.println("Danh sách nhân viên");
-           System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s","STT","Mã nhân viên",
-                   "Tên nhân viên","Tên phòng ban","Vị trí","Địa chỉ","Ngày sinh","Giới tính","SĐT","Email","Số tk","Tên Ngân hàng",
-                   "Tiền lương","Thuế","Là trưởng phòng");
-           System.out.println();
-           int count=1;
-           for(Employee employee : employeeList){
-
-               System.out.printf("%-10s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-30s%-20s%-20s%-20s%-20s%-20s",count,employee.getEmployeeCode(),
-                       employee.getEmployeeName(),employee.getDepartmentName(),employee.getPositionName(),employee.getAddress(),
-                       employee.getDateOfBirth(), MethodBase.convertGender(employee.getGender()),employee.getTelephoneNumber(),employee.getEmail(),
-                       employee.getBankAccountNumber(),employee.getBankName(),
-                       NumberFormat.getCurrencyInstance().format(employee.getSalary()),NumberFormat.getCurrencyInstance().format(employee.getTax()),MethodBase.stringIsManage(employee.getIsManage()));
-               System.out.println();
-               count++;
-           }
+      showListEmployee(employeeList);
        }
        else{
            System.out.println("Không tìm thấy nhân viên");
@@ -110,13 +91,16 @@ public class EmployeeService {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập mã nhân viên :");
-        String employeeCode = scanner.nextLine();
+        String employeeCode =MethodBase.getStringNotNull();
+
+
 
         while (Employee.checkDuplicateCode(employeeCode,null)){
             System.out.println("Mã nhân viên đã tồn tại");
             System.out.println("Nhập lại mã nhân viên :");
-            employeeCode = scanner.nextLine();
+            employeeCode =MethodBase.getStringNotNull();
         }
+
 
         System.out.println("Nhập tên nhân viên");
         String employeeName = scanner.nextLine();

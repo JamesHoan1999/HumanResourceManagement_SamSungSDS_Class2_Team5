@@ -15,21 +15,28 @@ public class DepartmentService {
     Lấy danh sách tất cả phòng ban
      */
     public static void getAllDepartment() {
-        System.out.println("------------------------------------------------------------------------------------------------");
+
 
         List<Department> departments = Department.getAllDepartment();
+
         System.out.println("Danh sách phòng ban ");
-        System.out.printf("%-20s%-20s%-20s%-20s%-20s", "STT", "Mã phòng ban", "Tên phòng ban", "Số điện thoại", "Tên trưởng phòng");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------");
+
+
+        System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s","|", "STT","|", "Mã phòng ban","|", "Tên phòng ban","|", "Số điện thoại","|", "Tên trưởng phòng","|");
         System.out.println();
+        System.out.println("--------------------------------------------------------------------------------------------------------------------");
+
         int count = 1;
 
         for (Department department : departments) {
 
-            System.out.printf("%-20s%-20s%-20s%-20s%-20s", count, department.getDepartmentCode(), department.getDepartmentName(), department.getPhoneNumber(), department.getManagerName());
+            System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s","|", count,"|", department.getDepartmentCode(),"|", department.getDepartmentName() ==null? "":department.getDepartmentName(),"|", department.getPhoneNumber() ==null? "":department.getPhoneNumber(),"|", department.getManagerName()==null? "":department.getManagerName(),"|") ;
             System.out.println();
+            System.out.println("--------------------------------------------------------------------------------------------------------------------");
+
             count++;
         }
-        System.out.println("------------------------------------------------------------------------------------------------");
 
     }
 
@@ -38,14 +45,13 @@ public class DepartmentService {
 
      */
     public static void insertDepartment() {
-        System.out.println("------------------------------------------------------------------------------------------------");
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Nhập mã phòng ban");
-        String departmentCode = scanner.nextLine();
+        String departmentCode =MethodBase.getStringNotNull();
         while (Department.checkDuplicateCode(departmentCode,null)){
             System.out.println("Mã phòng ban đã tồn tại trong hệ thống!Vui lòng nhập lại");
-            departmentCode=scanner.nextLine();
+            departmentCode=MethodBase.getStringNotNull();
         }
         System.out.println("Nhập tên phòng ban");
         String departmentName = scanner.nextLine();
@@ -73,7 +79,6 @@ public class DepartmentService {
     Cập nhật thông tin phòng ban
      */
     public static void updateDepartment() {
-        System.out.println("------------------------------------------------------------------------------------------------");
 
 
         getAllDepartment();
@@ -126,7 +131,6 @@ public class DepartmentService {
     Xóa thông tin phòng ban
      */
     public static void deleteDepartment() {
-        System.out.println("------------------------------------------------------------------------------------------------");
 
         getAllDepartment();
         List<Department> departments = Department.getAllDepartment();
@@ -152,7 +156,6 @@ public class DepartmentService {
     public static void insertEmployeeToDepartment() {
 
 
-        System.out.println("--------------------------------------------------------------------------------------------");
         getAllDepartment();
         System.out.println("Vui lòng nhập số thứ tự phòng ban muốn thêm nhân viên");
         List<Department> departments = Department.getAllDepartment();
@@ -192,7 +195,6 @@ public class DepartmentService {
 
     //Xóa nhân viên khỏi phòng ban
     public static void releaseEmployeeFromDepartment() {
-        System.out.println("------------------------------------------------------------------------------------------------");
         getAllDepartment();
         List<Department> departments = Department.getAllDepartment();
         System.out.println("Vui lòng nhập số thứ tự phòng ban muốn xóa nhân viên");
@@ -234,7 +236,7 @@ public class DepartmentService {
 
     //Điều chuyển  nhân viên khỏi phòng ban
     public static void updateDepartmentForEmployee() {
-        System.out.println("------------------------------------------------------------------------------------------------");
+
 
         getAllDepartment();
 
@@ -289,7 +291,7 @@ public class DepartmentService {
     //Bổ nhiệm trưởng phòng
     public static void updateManageForDepartment() {
 
-        System.out.println("------------------------------------------------------------------------------------------------");
+
 
         getAllDepartment();
 
@@ -331,7 +333,7 @@ public class DepartmentService {
 
     //Hiển thị danh sách nhân viên theo phòng ban
     public static void showListEmployeeByDepartment() {
-        System.out.println("------------------------------------------------------------------------------------------------");
+
 
         getAllDepartment();
 

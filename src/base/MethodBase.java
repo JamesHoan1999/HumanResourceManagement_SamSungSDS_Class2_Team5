@@ -115,6 +115,23 @@ public class MethodBase {
         return  email;
     }
 
+
+    /**
+     * Lấy chuỗi khác rỗng nhập từ bàn phím
+     * @return
+     */
+    public static String getStringNotNull(){
+        Scanner scanner = new Scanner(System.in);
+        String string = scanner.nextLine();
+
+        while (string.trim().equals("")) {
+            System.out.println("Trường này không được bỏ trống !Vui lòng nhập lại");
+            string = scanner.nextLine();
+        }
+
+        return  string;
+    }
+
     /**
      * Lấy sdt nhập từ bàn phím
      * @return sdt
@@ -251,5 +268,29 @@ public class MethodBase {
         } else {
             return "Không";
         }
+    }
+
+    public static  String getSalaryString(double salary) {
+
+
+        String salaryString = String.format("%.2f", salary);
+        int length = salaryString.length();
+        String result = salaryString.substring(length - 3, length);
+        for (int i = length - 6; i > 0; i = i - 3) {
+            result = "." + salaryString.substring(i, i + 3) + result;
+        }
+        if (length % 3 == 0) {
+            result = salaryString.substring(0, 3) + result;
+        }
+        else if (length % 3 == 1) {
+            result = salaryString.substring(0, 1) + result;
+        }
+        else if (length % 3 == 2) {
+            result = salaryString.substring(0, 2) + result;
+        }
+
+
+        return result;
+
     }
 }

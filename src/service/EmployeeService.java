@@ -21,25 +21,25 @@ public class EmployeeService {
     public static void  showListEmployee(List<Employee> employeeList){
         if(employeeList.size()>0){
             System.out.println("Danh sách nhân viên");
-            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
-            System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s","|","STT","|","Mã nhân viên","|",
+            System.out.printf("%-3s%-10s%-3s%-20s%-3s%-30s%-3s%-20s%-3s%-30s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-30s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s","|","STT","|","Mã nhân viên","|",
                     "Tên nhân viên","|","Tên phòng ban","|","Vị trí","|","Địa chỉ","|","Ngày sinh","|","Giới tính","|","SĐT","|","Email","|","Số tk","|","Tên Ngân hàng","|",
                     "Tiền lương","|","Thuế","|","Là trưởng phòng","|");
             System.out.println();
-            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
             int count=1;
             for(Employee employee : employeeList){
 
-                System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s","|",count,"|",employee.getEmployeeCode(),"|",
+                System.out.printf("%-3s%-10s%-3s%-20s%-3s%-30s%-3s%-20s%-3s%-30s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-30s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s","|",count,"|",employee.getEmployeeCode(),"|",
                         employee.getEmployeeName()==null ? "":employee.getEmployeeName(),"|",employee.getDepartmentName() ==null ?"":employee.getDepartmentName(),"|",employee.getPositionName()==null ? "":employee.getPositionName(),"|",employee.getAddress() ==null ? "" : employee.getAddress() ,"|"  ,
                         employee.getDateOfBirth() ==null ? "":employee.getDateOfBirth(),"|", MethodBase.convertGender(employee.getGender()),"|",employee.getTelephoneNumber()==null ? "":employee.getTelephoneNumber(),"|",
                         employee.getEmail()==null ? "": employee.getEmail(),"|",
                         employee.getBankAccountNumber()==null ? "": employee.getBankAccountNumber(),"|",employee.getBankName()==null ? "": employee.getBankName(),"|",
                         MethodBase.getSalaryString(employee.getSalary()),"|",MethodBase.getSalaryString(employee.getTax()),"|",MethodBase.stringIsManage(employee.getIsManage()),"|");
                 System.out.println();
-                System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
                 count++;
             }
@@ -333,7 +333,7 @@ public class EmployeeService {
         employee.setGender(gender);
 
         if(employee.updateEmployee()){
-            System.out.println("Cập nhật nhân viên thành công");
+            System.out.println("Cập nhật nhân viên thành công" );
         }
         else {
             System.out.println("Cập nhật nhân viên thất bại");
@@ -355,7 +355,8 @@ public class EmployeeService {
         int stt= MethodBase.getNumberFromMinToMax(1, employeeList.size());
         Employee employee=employeeList.get(stt-1);
         if(employee.deleteEmployee()){
-            System.out.println("Xóa nhân viên thành công");
+            System.out.println("Xóa thành công! Nhân viên vừa xóa có mã nhân viên là : "+employee.getEmployeeCode() + " Tên nhân viên là : " + employee.getDepartmentName());
+
         }
         else {
             System.out.println("Xóa nhân viên thất bại");

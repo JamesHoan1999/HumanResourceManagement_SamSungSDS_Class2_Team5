@@ -20,12 +20,12 @@ public class DepartmentService {
         List<Department> departments = Department.getAllDepartment();
 
         System.out.println("Danh sách phòng ban ");
-        System.out.println("--------------------------------------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------");
 
 
         System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s","|", "STT","|", "Mã phòng ban","|", "Tên phòng ban","|", "Số điện thoại","|", "Tên trưởng phòng","|");
         System.out.println();
-        System.out.println("--------------------------------------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------");
 
         int count = 1;
 
@@ -33,7 +33,7 @@ public class DepartmentService {
 
             System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s%-20s%-3s%-20s%-3s","|", count,"|", department.getDepartmentCode(),"|", department.getDepartmentName() ==null? "":department.getDepartmentName(),"|", department.getPhoneNumber() ==null? "":department.getPhoneNumber(),"|", department.getManagerName()==null? "":department.getManagerName(),"|") ;
             System.out.println();
-            System.out.println("--------------------------------------------------------------------------------------------------------------------");
+            System.out.println("----------------------------------------------------------------------------------------------------------");
 
             count++;
         }
@@ -142,7 +142,7 @@ public class DepartmentService {
         Department department = departments.get(stt);
 
         if (department.deleteDepartment()) {
-            System.out.println("Xóa  phòng ban thành công");
+            System.out.println("Xóa  phòng ban thành công .Tên phòng ban vừa xóa là : " + department.getDepartmentName());
         } else {
             System.out.println("Xóa phòng ban thất bại !Vì vẫn tồn tại nhân viên thuộc phòng ban này !");
         }
@@ -164,6 +164,8 @@ public class DepartmentService {
 
 
         Department department = departments.get(stt);
+
+        String departmentName=department.getDepartmentName().toLowerCase();
         List<Employee> employeeList = Employee.getEmployeesHasNotDepartmentID();
 
 
@@ -176,9 +178,11 @@ public class DepartmentService {
             stt2 = stt2 - 1;
 
             Employee employee = employeeList.get(stt2);
+            String employeeName =employee.getEmployeeName();
+            String employeeCode = employee.getEmployeeCode();
 
             if (employee.updateDepartmentEmployee(department.getDepartmentID())) {
-                System.out.println("Thêm nhân viên vào phòng ban thành công");
+                System.out.println("Bạn đã thêm nhân viên "+employeeName+" có mã nhân viên là  " + employeeCode +" vào "+departmentName);
             } else {
                 System.out.println("Thêm nhân viên vào phòng ban thất bại");
             }
@@ -203,10 +207,12 @@ public class DepartmentService {
 
 
         Department department = departments.get(stt);
+        String departmentName = department.getDepartmentName().toLowerCase();
         System.out.println("Bạn đang ở phòng ban : " + department.getDepartmentName());
 
         //Lấy ra danh sách nhân viên thuộc phòng ban
         List<Employee> employeeList = Employee.getEmployeesByDepartmentID(department.getDepartmentID());
+
 
         if (employeeList.size() > 0) {
             System.out.println("Danh sách nhân viên thuộc phòng ban thuộc phòng ban này");
@@ -218,8 +224,11 @@ public class DepartmentService {
 
             Employee employee = employeeList.get(stt2);
 
+            String employeeName = employee.getEmployeeName();
+            String employeeCode = employee.getEmployeeCode();
+
             if (employee.releaseEmployeeFromDepartment()) {
-                System.out.println("Xóa nhân viên vào phòng ban thành công");
+                System.out.println("Bạn vừa xóa nhân viên "+employeeName +" có mã nhân viên là  " + employeeCode +" khỏi "+departmentName);
             } else {
                 System.out.println("Xóa nhân viên khỏi phòng ban thất bại");
             }
@@ -248,6 +257,7 @@ public class DepartmentService {
 
 
         Department department = departments.get(stt);
+        String departmentNameOld = department.getDepartmentName().toLowerCase();
         System.out.println("Bạn đang ở phòng ban : " + department.getDepartmentName());
 
         //Lấy ra danh sách nhân viên thuộc phòng ban
@@ -257,12 +267,14 @@ public class DepartmentService {
             System.out.println("Danh sách nhân viên thuộc phòng ban thuộc phòng ban này");
             EmployeeService.showListEmployee(employeeList);
 
-            System.out.println("Vui lòng nhập số thứ tự nhân viên  ban muốn xóa khỏi phòng ban");
+            System.out.println("Vui lòng nhập số thứ tự nhân viên  ban muốn điều chuyển khỏi phòng ban");
             int stt2 = MethodBase.getNumberFromMinToMax(1,employeeList.size());
             stt2 = stt2 - 1;
 
 
             Employee employee = employeeList.get(stt2);
+            String employeeName = employee.getEmployeeName();
+            String employeeCode = employee.getEmployeeCode();
 
 
             System.out.println("Vui lòng nhập số thứ tự phòng để điều chuyển nhân viên đến");
@@ -270,10 +282,11 @@ public class DepartmentService {
             stt3 = stt3 - 1;
 
             Department departmentNew = departments.get(stt3);
+            String departmentNameNew = departmentNew.getDepartmentName().toLowerCase();
 
 
             if (employee.updateDepartmentEmployee(departmentNew.getDepartmentID())) {
-                System.out.println("Điều chuyển nhân viên thành công");
+                System.out.println("Điều chuyển  thành công nhân viên "+employeeName +" có mã nhân viên là  "+employeeCode+ " từ "+departmentNameOld+" đến "+departmentNameNew);
             } else {
                 System.out.println("Điều chuyển nhân viên thất bại");
             }
@@ -302,6 +315,8 @@ public class DepartmentService {
 
 
         Department department = departments.get(stt);
+
+        String departmentName = department.getDepartmentName().toLowerCase();
         System.out.println("Bạn đang ở phòng ban : " + department.getDepartmentName());
 
         //Lấy ra danh sách nhân viên thuộc phòng ban
@@ -316,9 +331,11 @@ public class DepartmentService {
             stt2 = stt2 - 1;
 
             Employee employee = employeeList.get(stt2);
+            String employeeName = employee.getEmployeeName();
+            String employeeCode = employee.getEmployeeCode();
 
             if (employee.updateManageEmployee()) {
-                System.out.println("Bổ nhiệm trưởng phòng thành công");
+                System.out.println("Bạn vừa bổ nhiệm nhân viên "+employeeName + " có mã nhân viên là  "+employeeCode +" làm trưởng "+departmentName);
             } else {
                 System.out.println("Bổ nhiệm trưởng phòng thất bại");
             }

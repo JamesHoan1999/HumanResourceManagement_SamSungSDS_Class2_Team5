@@ -27,7 +27,7 @@ public class Program {
         System.out.println("1.Danh mục nhân viên  ");
         System.out.println("2.Danh mục phòng ban ");
         System.out.println("3.Thống kê");
-        System.out.println("4.Logout");
+        System.out.println("4.Đăng xuất");
         System.out.println("Nhập số từ 1 đến 4 để vào mục tiếp theo");
 
         int choice = MethodBase.getNumberFromMinToMax(1,4);

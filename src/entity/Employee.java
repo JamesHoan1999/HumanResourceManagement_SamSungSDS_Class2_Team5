@@ -222,7 +222,7 @@ public class Employee {
 
 
             //Chuẩn bị câu lệnh truy vấn
-            String sql = "SELECT e.*,d.DepartmentName from employee e left JOIN department d ON  e.DepartmentID=d.DepartmentID  ";
+            String sql = "SELECT e.*,d.DepartmentName from employee e left JOIN department d ON  e.DepartmentID=d.DepartmentID ORDER BY e.EmployeeCode ";
             //Khởi tạo kết nối đến database
             Statement statement = MySQLConnection.getStatement();
             //Thực hiện truy vấn vào database
@@ -275,7 +275,7 @@ public class Employee {
         try {
 
             //Chuẩn bị câu lệnh sql
-            String sql = "SELECT e.*,d.DepartmentName from employee e left JOIN department d ON  e.DepartmentID=d.DepartmentID where e.DepartmentID='" + departmentID + "' ";
+            String sql = "SELECT e.*,d.DepartmentName from employee e left JOIN department d ON  e.DepartmentID=d.DepartmentID where e.DepartmentID='" + departmentID + "'  ORDER BY e.EmployeeCode";
             //Khởi tạo kết nối đến databsae
             Statement statement = MySQLConnection.getStatement();
 
@@ -328,7 +328,7 @@ public class Employee {
         try {
 
             //Chuẩn bị câu lệnh sql
-            String sql = "SELECT * from employee e where e.DepartmentID is null";
+            String sql = "SELECT * from employee e where e.DepartmentID is null ORDER BY e.EmployeeCode";
             //Khởi tạo kết nối đến database
             Statement statement = MySQLConnection.getStatement();
             //Thực hiện truy vấn vào database
@@ -384,7 +384,7 @@ public class Employee {
         try {
 
             //Chuẩn bị câu lệnh truy vấn
-            String sql = "SELECT e.*,d.DepartmentName from employee e left JOIN department d ON  e.DepartmentID=d.DepartmentID  where  e.EmployeeCode LIKE '%" + keySearch + "%' OR e.EmployeeName like '%" + keySearch + "%' OR e.TelephoneNumber LIKE '%" + keySearch + "%' OR e.Email LIKE '%" + keySearch + "%' ;";
+            String sql = "SELECT e.*,d.DepartmentName from employee e left JOIN department d ON  e.DepartmentID=d.DepartmentID  where  e.EmployeeCode LIKE '%" + keySearch + "%' OR e.EmployeeName like '%" + keySearch + "%' OR e.TelephoneNumber LIKE '%" + keySearch + "%' OR e.Email LIKE '%" + keySearch + "%' ORDER BY e.EmployeeCode;";
             //Khởi tạo kết nối đến database
             Statement statement = MySQLConnection.getStatement();
             //Thực hiện truy vấn vào database

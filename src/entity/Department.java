@@ -79,7 +79,7 @@ public class Department {
         try {
 
             //Chuẩn bị câu lệnh truy vấn
-            String sql = "SELECT d.*,e.EmployeeName AS ManageName FROM department d  left JOIN employee e ON  d.DepartmentID=e.DepartmentID AND e.IsManage = 1";
+            String sql = "SELECT d.*,e.EmployeeName AS ManageName FROM department d  left JOIN employee e ON  d.DepartmentID=e.DepartmentID AND e.IsManage = 1 ORDER BY d.DepartmentCode";
             //Khởi tạo kết nối
             Statement statement = MySQLConnection.getStatement();
 
@@ -198,7 +198,7 @@ public class Department {
 
     /**
      * Kiểm tra mã phòng ban tồn tại trong hệ thống chưa
-     * @param empCode
+     * @param departCode
      * @param id
      * @return
      */
@@ -211,7 +211,7 @@ public class Department {
                 sql = "SELECT * FROM department WHERE DepartmentCode = '" + departCode + "' ";
             }
             else {
-                sql = "SELECT * FROM department WHERE DepartmentCode = '" + departCode + "' AND EmployeeID != '" + id + "'";
+                sql = "SELECT * FROM department WHERE DepartmentCode = '" + departCode + "' AND DepartmentID != '" + id + "'";
 
             }
             //Khởi tạo kết nối đến database

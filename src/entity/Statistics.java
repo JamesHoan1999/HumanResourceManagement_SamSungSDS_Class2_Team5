@@ -84,16 +84,18 @@ public class Statistics {
 
 
 
-            System.out.printf("%-3s%-20s%-3s%-20s%-3s","|", "Tên phòng ban","|", "Số lượng nhân viên","|");
+            System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s","|","STT","|", "Tên phòng ban","|", "Số lượng nhân viên","|");
             System.out.println();
             System.out.println("-----------------------------------------------");
 
 
             //lấy dữ liệu từ database rồi add vào employeeList
+            int count=1;
             while (resultSet.next()) {
-                System.out.printf("%-3s%-20s%-3s%-20s%-3s","|", resultSet.getString("DepartmentName"),"|", resultSet.getInt("employeeQuantity"),"|");
+                System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s","|",count,"|",  resultSet.getString("DepartmentName"),"|", resultSet.getInt("employeeQuantity"),"|");
                 System.out.println();
                 System.out.println("-----------------------------------------------");
+                count++;
 
 
             }
@@ -128,16 +130,18 @@ public class Statistics {
             System.out.println(" Lương trung bình của mỗi phòng ban");
             System.out.println("-----------------------------------------------");
 
-            System.out.printf("%-3s%-20s%-3s%-20s%-3s","|", "Tên phòng ban","|", "Tiền lương trung bình","|");
+            System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s","|","STT","|" ,"Tên phòng ban","|", "Tiền lương trung bình","|");
             System.out.println();
             System.out.println("-----------------------------------------------");
 
 
             //lấy dữ liệu từ database rồi add vào employeeList
+            int count =1;
             while (resultSet.next()) {
-                System.out.printf("%-3s%-20s%-3s%-20s%-3s","|", resultSet.getString("DepartmentName"),"|", MethodBase.getSalaryString(resultSet.getDouble("avgSalary")),"|" );
+                System.out.printf("%-3s%-10s%-3s%-20s%-3s%-20s%-3s","|",count,"|", resultSet.getString("DepartmentName"),"|", MethodBase.getSalaryString(resultSet.getDouble("avgSalary")),"|" );
                 System.out.println();
                 System.out.println("-----------------------------------------------");
+                count++;
 
 
             }
